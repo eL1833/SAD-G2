@@ -1,0 +1,105 @@
+:root{
+  --blue:#2f6ef6;
+  --bg:#f4f6f8;
+  --card:#fff;
+  --muted:#6b7280;
+  --radius:12px;
+  --input-border:#d6d9e6;
+  --shadow:0 10px 28px rgba(21,33,62,0.08);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);}
+
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;width:100%}
+
+/* blue header that matches screenshot */
+.hero{
+  width:100%;
+  max-width:420px;
+  background:var(--blue);
+  color:#fff;
+  border-top-left-radius:var(--radius);
+  border-top-right-radius:var(--radius);
+  text-align:center;
+  padding:28px 20px 18px;
+  box-shadow: inset 0 -6px 12px rgba(0,0,0,0.03);
+}
+
+/* logo in the centre of the blue header */
+.hero__logo{
+  width:72px;
+  height:72px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+  margin:0 auto 12px;
+  background:#031a4d;
+  padding:6px;
+  box-shadow:0 6px 18px rgba(2,6,23,0.12);
+  border:2px solid rgba(255,255,255,0.12);
+}
+
+/* welcome + subtitle styling */
+.hero__title{margin:0;font-size:20px;font-weight:600;letter-spacing:0.2px;color:#fff}
+.hero__sub{margin:6px 0 0;color:rgba(255,255,255,0.95);font-size:14px}
+
+/* card sits immediately under the blue header */
+.card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  border-bottom-left-radius:var(--radius);
+  border-bottom-right-radius:var(--radius);
+  padding:22px;
+  box-shadow:var(--shadow);
+  margin-top:0;
+}
+
+/* form fields */
+.signin-form{display:flex;flex-direction:column;gap:14px}
+.field{display:block}
+.field__label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+.field__input{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--input-border);
+  border-radius:10px;
+  font-size:14px;
+  background:#fff;
+  outline:none;
+  transition:box-shadow .12s, border-color .12s;
+}
+.field__input:focus{border-color:var(--blue);box-shadow:0 8px 20px rgba(47,110,246,0.08)}
+
+/* wrapper for password field to hold input and toggle button */
+.field__wrapper{position:relative;display:flex;align-items:center}
+.field__wrapper .field__input{flex:1;padding-right:40px} /* space for the button */
+.field__toggle{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  width:20px;
+  height:20px;
+  color:var(--muted);
+}
+.toggle-icon{width:100%;height:100%;object-fit:contain}
+
+/* primary full-width button */
+.btn{display:inline-block;padding:12px 16px;border-radius:10px;font-weight:600;cursor:pointer;border:none}
+.btn--primary{background:var(--blue);color:#fff;width:100%;box-shadow:0 10px 22px rgba(47,110,246,0.12)}
+
+.card__footer{margin:12px 0 0;text-align:center;color:var(--muted);font-size:13px}
+.card__footer a{color:var(--blue);text-decoration:none;font-weight:600}
+
+/* small screens */
+@media (max-width:480px){
+  .hero{padding:22px 16px}
+  .card{padding:16px}
+  .hero__logo{width:64px;height:64px}
+}
