@@ -1,3 +1,4 @@
+// Password toggle functionality
 const togglePassword = document.getElementById('togglePassword');
 const password = document.getElementById('password');
 const eyeShow = togglePassword.querySelector('.eye-show');
@@ -17,3 +18,27 @@ togglePassword.addEventListener('click', function (e) {
     }
 });
 
+// Function to redirect based on selected role
+function redirectToDashboard(role) {
+    const dashboardUrls = {
+        requester: 'RequesterDashboard.html',
+        buildingMaintenance: 'BuildingMaintenance.html', // Assuming approver redirects to a specific dashboard
+        custodian: 'CustodianDashboard.html',
+        purchasing: 'PurchasingDashboard.html'
+    };
+    
+    const url = dashboardUrls[role];
+    if (url) {
+        window.location.href = url; // Redirect to the respective dashboard
+    } else {
+        alert('Invalid role selected. Please try again.');
+    }
+}
+
+// Handle form submission
+document.getElementById('signinForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+    
+    const role = document.getElementById('roleSelect').value;
+    redirectToDashboard(role);
+});
