@@ -43,10 +43,28 @@ body {
     margin-left: auto;
 }
 
+.lh1 {
+    display: flex;
+    margin: 0px;
+}
+
+.l1 {
+    font-size: 0.675rem;
+    margin-right: 0px;
+    background-color: #f8eeff;
+    padding: 3px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    border-radius: 0.5rem;
+    border: 2px solid #f8eeff;
+    color:#193CB8;
+}
+
 .lg0 {
     background-color: #f8eeff;
     padding: 5px;
     margin: 5px;
+    margin-left: 0px;
     border-radius: 0.5rem;
     border: 2px solid #f8eeff;
 }
@@ -54,6 +72,7 @@ body {
 .lg-0 {
     width: 13px;
     height: 13px;
+    margin-left: 0px
 }
 
 .lg1 {
@@ -64,6 +83,12 @@ body {
     border: 2px solid #f8eeff;
 }
 
+.lg1:hover {
+    color: #193CB8;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
 .lg2 {
     background-color: #f8eeff;
     padding: 5px;
@@ -72,16 +97,45 @@ body {
     border: 2px solid #f8eeff;
 }
 
+.lg2:hover {
+    color: #193CB8;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.lg3{
+    color: #BC5206;
+    background-color: #FFFAEB;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 0.5rem;
+    border: 1px solid #E17100;
+    font-size: 0.875rem;
+}
+
 .h2 {
+    display: flex;
     align-items: center;
     gap: 0.75rem;
+}
+
+.h3 {
+    margin-left: auto;
 }
 
 .t0 {
     font-size: 0.775rem;
     color: #f8eeff;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.t01 {
+    font-size: 0.775rem;
+    color: #f8eeff;
     margin-top: 0px;
     margin-bottom: 5px;
+    text-align: right;
 }
 
 .t1 {
@@ -94,7 +148,8 @@ body {
     color: #f8eeff;
     margin-top: 5px;
 }
- .t3 {
+
+.t3 {
     color: #111827; 
     margin-bottom: 0px;
  }
@@ -103,6 +158,7 @@ body {
     color: #111827;
     margin-top: 5px; 
     margin-bottom: 30px;
+    color: #6b7280;
 }
 
 .B {
@@ -182,7 +238,30 @@ body {
     margin-right: 1rem;
 }
 
+.sear {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.SB {
+    background-color: white;
+    border: 1px solid #F7DBBF; 
+    border-radius: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .S {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.S0 {
+    margin: 5px;
     position: relative;
     display: flex;
     align-items: center;
