@@ -36,7 +36,7 @@
 
             <!-- Title -->
             <div class="title-section">
-            <p class="h4">Account Settings</h4>
+            <p class="h4">Account Settings</p>
             <p class="p">Manage your account information and preferences</p>
             </div>
         </div>
@@ -83,26 +83,26 @@
 
         <!-- Security Card -->
         <div class="card">
-            <div class="card-header1">
-            <div class="header-content">
-                <div class="icon-bg">
+            <div class="card-header-s">
+            <div class="header-content-s">
+                <div class="icon-bg-1">
                 <i class="fas fa-shield-alt icon"></i>
                 </div>
                 <div>
                 <h3>Security</h3>
-                <p>update your password to keep your account secure</p>
+                <p class="para">update your password to keep your account secure</p>
                 </div>
             </div>
             <button class="change-pwd-btn" id="changePwdBtn">🔐 Change Password</button>
             </div>
-            <div class="card-content">
-            <p>Your password is encrypted and secure. Click "Change Password" to update it.</p>
+            <div class="card-content-s">
+            <p class="parag">Your password is encrypted and secure. Click "Change Password" to update it.</p>
             </div>
         </div>
 
       <!-- Account Information Card -->
       <div class="card">
-        <div class="card-header account-header">
+        <div class="card-header">
           <div class="header-content">
             <div class="icon-bg">
               <i class="fas fa-calendar icon"></i>
@@ -148,6 +148,29 @@
       <div class="modal-actions">
         <button class="cancel-btn" id="cancelBtn">Cancel</button>
         <button class="update-btn" id="updateBtn">Update Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal (New Addition) -->
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <h3>Edit Profile</h3>
+      <div class="form-group">
+        <label for="editName">Name</label>
+        <input type="text" id="editName" placeholder="Enter name">
+      </div>
+      <div class="form-group">
+        <label for="editEmail">Email</label>
+        <input type="email" id="editEmail" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="editDept">Department</label>
+        <input type="text" id="editDept" placeholder="Enter department">
+      </div>
+      <div class="modal-actions">
+        <button class="cancel-btn" id="editCancelBtn">Cancel</button>
+        <button class="update-btn" id="editSaveBtn">Save Changes</button>
       </div>
     </div>
   </div>
