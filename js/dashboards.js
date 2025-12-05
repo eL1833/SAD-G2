@@ -33,3 +33,13 @@ document.querySelector('.lg2').addEventListener('click', function() {
     window.location.href = 'LoginDashboard.html'; // Adjust path if necessary
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation for "New Request Form" button
+    const newRequestBtn = document.querySelector('.lg3');
+    if (newRequestBtn) {
+        newRequestBtn.addEventListener('click', function() {
+            window.location.href = 'JobRequest.html'; // Navigate to Job Request Form
+        });
+    }
+});
