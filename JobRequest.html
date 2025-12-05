@@ -1,1 +1,148 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Request Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/jobReq.css">
+</head>
+<body>
+  <!-- Header (Navigation Bar) -->
+  <div class="header">
+    <div class="h1">
+      <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
+      <div>
+        <h2 class="t1">CReMaTS</h2>
+        <p class="t2">Centralized Requisition and Maintenance System</p>
+      </div>
+      <div class="lh">
+        <p class="t0">name</p>
+        <div>
+          <p class="l1">building maintenance</p>
+          <p class="t01">email</p>
+        </div>
+      </div>
+      <div class="lh1">
+        <p class="lg0"><img src="img/notification-icon.png" class="lg-0">0</p>
+        <a class="lg1" href="accountSettings.html">Account</a>
+        <a class="lg2" href="LoginDashboard.html">Log-out</a>
+      </div>
+    </div>
+    <!-- Main Container (Form) -->
+  <div class="container">
+    <div class="ct">
+      <!-- Title -->
+      <div class="title-section">
+        <p class="h4">Job Request Form</p>
+        <p class="p">Centralized Requisition and Maintenance System</p>
+      </div>
+    </div>
+    <!-- Blue Banner -->
+    <div class="request-banner">
+      <div>
+        <div class="req-title">Job Requests - RQT12345454645634</div>
+        <div class="req-dept">Department/Unit: Finance</div>
+      </div>
+      <div class="submission-box">
+        <p class="date1">Submitted:</p>
+        <p class="date">11/1/25, 2:19:16 PM</p>
+      </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="form-content">
+      
+      <!-- Items Section -->
+      <div class="items-header">
+        <h3>Items Requested:</h3>
+        <button class="btn-add">+ Add Item</button>
+      </div>
+
+      <div class="items-table-container">
+        <!-- Table Headers -->
+        <div class="items-grid">
+          <div class="grid-header">#</div>
+          <div class="grid-header">Item Name</div>
+          <div class="grid-header">Specifications</div>
+          <div class="grid-header">Unit of Measure</div>
+          <div class="grid-header">Quantity</div>
+        </div>
+        
+        <!-- Input Row -->
+        <div class="items-grid1">
+          <input type="text" class="input-field" value="1" readonly style="text-align: center;">
+          <input type="text" class="input-field">
+          <input type="text" class="input-field">
+          <input type="text" class="input-field">
+          <input type="number" class="input-field">
+        </div>
+      </div>
+
+      <!-- Purpose -->
+      <div class="form-group">
+        <label class="form-label">Purpose</label>
+        <input type="text" class="input-field1" placeholder="">
+      </div>
+
+      <!-- Requested By & Dept Head -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Requested By</label>
+          <input type="text" class="input-field" readonly>
+          <p class="helper-text">Auto-filled from your account</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Department Head</label>
+          <input type="text" class="input-field">
+        </div>
+      </div>
+
+      <!-- Noted By -->
+      <label class="form-label">Noted by</label>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="input-field" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="input-field" placeholder="Title/Position">
+        </div>
+      </div>
+
+      <!-- Approved By -->
+      <label class="form-label">Approved by</label>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" class="input-field" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="input-field" placeholder="Title/Position">
+        </div>
+      </div>
+
+      <!-- Estimated Cost -->
+      <div class="form-group">
+        <label class="form-label">Estimated Cost</label>
+        <input type="text" class="input-field">
+        <p class="helper-text">Optional - Enter the estimated total cost for this request</p>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="warning-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span class="warning-text">Please ensure all required fields (*) are filled out accurately. This will help us process your request more efficiently.</span>
+      </div>
+
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="form-footer">
+      <button class="btn-cancel">Cancel</button>
+      <button class="btn-submit">Submit Request</button>
+    </div>
+  </div>
+
+  <script src="js/jobReq.js"></script>
+</body>
+</html>
