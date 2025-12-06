@@ -9,24 +9,27 @@ document.addEventListener('DOMContentLoaded', function() {
         return `JR-${year}${month}${day}-${randomNum}`;
     };
 
-    // Set request code and current date
-    const rqtCodeElement = document.getElementById('rqtCode');
-    const currentDateElement = document.getElementById('currentDate');
-    if (rqtCodeElement) rqtCodeElement.textContent = generateRequestCode();
-    if (currentDateElement) currentDateElement.textContent = new Date().toLocaleDateString();
+    // Set request code and current date (note: HTML has 'rqtId' not 'rqtCode', and no 'currentDate' element, so adjust if needed)
+    const rqtIdElement = document.getElementById('rqtId');
+    if (rqtIdElement) {
+        const code = generateRequestCode();
+        rqtIdElement.textContent = `Job Requests - ${code}`;
+    }
 
-    // Add Item functionality (updated for div-based grid)
+    // Add Item functionality (updated for div-based grid with proper numbering)
     const addItemBtn = document.querySelector('.btn-add');
     const itemsTableContainer = document.querySelector('.items-table-container');
-    let itemCount = 0;
 
     if (addItemBtn && itemsTableContainer) {
         addItemBtn.addEventListener('click', function() {
-            itemCount++;
+            // Calculate the next item number based on current rows
+            const existingRows = itemsTableContainer.querySelectorAll('.items-grid1').length;
+            const nextNumber = existingRows + 1;
+
             const newRow = document.createElement('div');
             newRow.className = 'items-grid1';
             newRow.innerHTML = `
-                <input type="text" class="input-field" value="${itemCount}" readonly style="text-align: center;">
+                <input type="text" class="input-field" value="${nextNumber}" readonly style="text-align: center;">
                 <input type="text" class="input-field" placeholder="Item Name">
                 <input type="text" class="input-field" placeholder="Specifications">
                 <input type="text" class="input-field" placeholder="Unit of Measure">
@@ -38,8 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add delete functionality to the new button
             newRow.querySelector('.delete-btn').addEventListener('click', function() {
                 newRow.remove();
-                itemCount--;
-                updateItemNumbers();
+                updateItemNumbers(); // Renumber after deletion
             });
         });
     }
@@ -53,68 +55,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Form submission (updated for div-based grid)
-    const form1 = document.querySelector('.form1');
-
-    if (form1) {
-        form1.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic validation
-            const purpose = document.getElementById('purpose') ? document.getElementById('purpose').value.trim() : '';
-            const requestedBy = document.getElementById('requestedBy') ? document.getElementById('requestedBy').value : '';
-            const notedByName = document.getElementById('notedByName') ? document.getElementById('notedByName').value.trim() : '';
-            const notedByTitle = document.getElementById('notedByTitle') ? document.getElementById('notedByTitle').value.trim() : '';
-            const approvedByName = document.getElementById('approvedByName') ? document.getElementById('approvedByName').value.trim() : '';
-            const approvedByTitle = document.getElementById('approvedByTitle') ? document.getElementById('approvedByTitle').value.trim() : '';
-            const departmentHead = document.getElementById('departmentHead') ? document.getElementById('departmentHead').value.trim() : '';
-            const estimatedCost = document.getElementById('estimatedCost') ? document.getElementById('estimatedCost').value.trim() : '';
-            
-            // Check if at least one item is added
-            const itemRows = itemsTableContainer.querySelectorAll('.items-grid1');
-            if (itemRows.length === 0) {
-                alert('Please add at least one item.');
-                return;
-            }
-            
-            // Validate required fields
-            if (!purpose || !notedByName || !notedByTitle || !approvedByName || !approvedByTitle || !departmentHead) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Validate items
-            let itemsValid = true;
-            itemRows.forEach(row => {
-                const inputs = row.querySelectorAll('input:not([readonly])');
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        itemsValid = false;
-                    }
-                });
-            });
-            if (!itemsValid) {
-                alert('Please fill in all item details.');
-                return;
-            }
-            
-            // If all good, submit (in a real app, send to server)
-            alert('Job request submitted successfully!');
-            // Reset form
-            form1.reset();
-            itemsTableContainer.innerHTML = `
-                <div class="items-grid">
-                    <div class="grid-header">#</div>
-                    <div class="grid-header">Item Name</div>
-                    <div class="grid-header">Specifications</div>
-                    <div class="grid-header">Unit of Measure</div>
-                    <div class="grid-header">Quantity</div>
-                </div>
-            `;
-            itemCount = 0;
-            if (rqtCodeElement) rqtCodeElement.textContent = generateRequestCode();
+    // Account button functionality
+    const accountBtn = document.querySelector('.lg1');
+    if (accountBtn) {
+        accountBtn.addEventListener('click', function() {
+            window.location.href = 'AccountSettingsDashboard.html';
         });
     }
+
+    // Logout functionality (with confirmation)
+    document.querySelector('.lg2').addEventListener('click', function() {
+        if (confirm('Are you sure you want to log out?')) {
+            window.location.href = 'LoginDashboard.html';
+        }
+    });
+
+    // Auto-fill "Requested By" (simulate from account)
+    document.getElementById('requestedBy').value = 'John Doe'; // Replace with actual logic
+
+    // Remove the form1 submission handler since there's no form with class 'form1' in the HTML
+    // The submitBtn handler below handles the submission
 
     // Cancel button - Navigate back to Requester Dashboard
     const cancelBtn = document.querySelector('.btn-cancel');
@@ -125,4 +85,86 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Handle Submit (fixed item collection and validation)
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        // Collect data
+        const items = [];
+        const itemRows = itemsTableContainer.querySelectorAll('.items-grid1');
+        itemRows.forEach(row => {
+            // Query inputs by position since the first row uses IDs and added rows use placeholders
+            const inputs = row.querySelectorAll('input.input-field:not([readonly])');
+            if (inputs.length >= 4) {
+                const name = inputs[0].value.trim();
+                const specs = inputs[1].value.trim();
+                const uom = inputs[2].value.trim();
+                const qty = inputs[3].value.trim();
+                if (name) items.push({ name, specs, uom, qty });
+            }
+        });
+        const purpose = document.getElementById('purpose').value.trim();
+        const requestedBy = document.getElementById('requestedBy').value.trim();
+        const deptHead = document.getElementById('deptHead').value.trim();
+        const notedName = document.getElementById('notedName').value.trim();
+        const notedTitle = document.getElementById('notedTitle').value.trim();
+        const approvedName = document.getElementById('approvedName').value.trim();
+        const approvedTitle = document.getElementById('approvedTitle').value.trim();
+        const estimatedCost = document.getElementById('estimatedCost').value.trim();
+
+        // Validation (expanded to check more fields)
+        if (!purpose) {
+            alert('Please fill in the Purpose.');
+            return;
+        }
+        if (items.length === 0) {
+            alert('Please add and fill in at least one item.');
+            return;
+        }
+        if (!deptHead || !notedName || !notedTitle || !approvedName || !approvedTitle) {
+            alert('Please fill in all required fields (Department Head, Noted by, Approved by).');
+            return;
+        }
+
+        // Generate RQT ID and date (using consistent format)
+        const rqtId = 'RQT' + Date.now();
+        const submittedDate = new Date().toLocaleString();
+
+        // Create request object
+        const request = {
+            rqtId,
+            title: purpose, // Use purpose as title
+            status: 'Pending',
+            date: submittedDate,
+            progress: 'No updates yet',
+            details: 'View Details',
+            items,
+            requestedBy,
+            deptHead,
+            noted: { name: notedName, title: notedTitle },
+            approved: { name: approvedName, title: approvedTitle },
+            estimatedCost
+        };
+
+        // Store in localStorage
+        const requests = JSON.parse(localStorage.getItem('jobRequests')) || [];
+        requests.push(request);
+        localStorage.setItem('jobRequests', JSON.stringify(requests));
+
+        // Update display
+        if (rqtIdElement) rqtIdElement.textContent = `Job Requests - ${rqtId}`;
+        const submittedDateElement = document.getElementById('submittedDate');
+        if (submittedDateElement) submittedDateElement.textContent = submittedDate;
+
+        // Show success message and redirect after delay
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'RequesterDashboard.html';
+            }, 2000);
+        }
+    });
+
+    // Handle Cancel (already handled above, but kept for consistency)
+    // Note: The cancelBtn handler is already defined above
 });
