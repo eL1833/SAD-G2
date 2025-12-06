@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +24,9 @@
         </div>
       </div>
       <div class="lh1">
-        <p class="lg0"><img src="img/notification-icon.png" class="lg-0">0</p>
-        <a class="lg1" href="accountSettings.html">Account</a>
-        <a class="lg2" href="LoginDashboard.html">Log-out</a>
+        <p class="lg0"><i class="fa-solid fa-bell bell-icon"></i> 0</p>
+        <p class="lg1" href="accountSettings.html"><i class="fa-solid fa-user icon-align"></i>  Account</p>
+        <p class="lg2" href="LoginDashboard.html"><i class="fa-solid fa-right-from-bracket icon-align"></i>  Log out</p>
       </div>
     </div>
     <!-- Main Container (Form) -->
@@ -42,12 +41,12 @@
     <!-- Blue Banner -->
     <div class="request-banner">
       <div>
-        <div class="req-title">Job Requests - RQT12345454645634</div>
+        <div class="req-title" id="rqtId">Job Requests - RQT12345454645634</div>  <!-- Added id for dynamic update -->
         <div class="req-dept">Department/Unit: Finance</div>
       </div>
       <div class="submission-box">
         <p class="date1">Submitted:</p>
-        <p class="date">11/1/25, 2:19:16 PM</p>
+        <p class="date" id="submittedDate">11/1/25, 2:19:16 PM</p>  <!-- Added id for dynamic update -->
       </div>
     </div>
 
@@ -57,10 +56,10 @@
       <!-- Items Section -->
       <div class="items-header">
         <h3>Items Requested:</h3>
-        <button class="btn-add">+ Add Item</button>
+        <button class="btn-add" id="addItemBtn">+ Add Item</button>  <!-- Added id -->
       </div>
 
-      <div class="items-table-container">
+      <div class="items-table-container" id="itemsTable">  <!-- Added id -->
         <!-- Table Headers -->
         <div class="items-grid">
           <div class="grid-header">#</div>
@@ -71,31 +70,31 @@
         </div>
         
         <!-- Input Row -->
-        <div class="items-grid1">
+        <div class="items-grid1" id="itemRow1">  <!-- Added id -->
           <input type="text" class="input-field" value="1" readonly style="text-align: center;">
-          <input type="text" class="input-field">
-          <input type="text" class="input-field">
-          <input type="text" class="input-field">
-          <input type="number" class="input-field">
+          <input type="text" class="input-field" id="itemName1">
+          <input type="text" class="input-field" id="itemSpecs1">
+          <input type="text" class="input-field" id="itemUom1">
+          <input type="number" class="input-field" id="itemQty1">
         </div>
       </div>
 
       <!-- Purpose -->
       <div class="form-group">
         <label class="form-label">Purpose</label>
-        <input type="text" class="input-field1" placeholder="">
+        <input type="text" class="input-field1" id="purpose" placeholder="">
       </div>
 
       <!-- Requested By & Dept Head -->
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Requested By</label>
-          <input type="text" class="input-field" readonly>
+          <input type="text" class="input-field" id="requestedBy" readonly>
           <p class="helper-text">Auto-filled from your account</p>
         </div>
         <div class="form-group">
           <label class="form-label">Department Head</label>
-          <input type="text" class="input-field">
+          <input type="text" class="input-field" id="deptHead">
         </div>
       </div>
 
@@ -103,10 +102,10 @@
       <label class="form-label">Noted by</label>
       <div class="form-row">
         <div class="form-group">
-          <input type="text" class="input-field" placeholder="Name">
+          <input type="text" class="input-field" id="notedName" placeholder="Name">
         </div>
         <div class="form-group">
-          <input type="text" class="input-field" placeholder="Title/Position">
+          <input type="text" class="input-field" id="notedTitle" placeholder="Title/Position">
         </div>
       </div>
 
@@ -114,17 +113,17 @@
       <label class="form-label">Approved by</label>
       <div class="form-row">
         <div class="form-group">
-          <input type="text" class="input-field" placeholder="Name">
+          <input type="text" class="input-field" id="approvedName" placeholder="Name">
         </div>
         <div class="form-group">
-          <input type="text" class="input-field" placeholder="Title/Position">
+          <input type="text" class="input-field" id="approvedTitle" placeholder="Title/Position">
         </div>
       </div>
 
       <!-- Estimated Cost -->
       <div class="form-group">
         <label class="form-label">Estimated Cost</label>
-        <input type="text" class="input-field">
+        <input type="text" class="input-field" id="estimatedCost">
         <p class="helper-text">Optional - Enter the estimated total cost for this request</p>
       </div>
 
@@ -136,10 +135,14 @@
 
     </div>
 
+    <!-- Success Message (hidden by default) -->
+    <div id="successMessage" class="success-message" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+      Request submitted successfully!
+    </div>
     <!-- Footer Buttons -->
     <div class="form-footer">
-      <button class="btn-cancel">Cancel</button>
-      <button class="btn-submit">Submit Request</button>
+      <button class="btn-cancel" id="cancelBtn">Cancel</button>
+      <button class="btn-submit" id="submitBtn" type="button">Submit Request</button>
     </div>
   </div>
 
