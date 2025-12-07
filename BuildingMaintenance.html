@@ -8,31 +8,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Added FontAwesome for the ellipsis icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
 </head>
 
 <body>
   <div class="header">
-     <!-- Header -->
-     <div class="h1">
-          <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
-          <div>
-            <h2 class="t1">CReMaTS</h2>
-            <p class="t2">Centralized Requisition and Maintenance System</p>
-          </div>
-          <div class="lh">
-          <p class="t0">name</p>
-          <div>
-            <p class="l1">building maintenance</p>
-            <p class="t01">email</p>  
-          </div> 
-        </div>
-        <div class="lh1">
-          <p class="lg0"><img src="img/notification-icon.png" class=" lg-0">0</p>
-          <p class="lg1">Account</p>
-          <p class="lg2">Log-out</p>
-        </div>
-        </div>
+    <div class="h1">
+      <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
+      <div>
+        <h2 class="t1">CReMaTS</h2>
+        <p class="t2">Centralized Requisition and Maintenance System</p>
+      </div>
+      <div class="lh">
+        <p class="t0">nickjose35</p>
+        <div>
+          <p class="l1">building maintenance</p>
+          <p class="t01">nickjose35@gmail.com</p>  
+        </div> 
+      </div>
+      <div class="lh1">
+        <p class="lg0"><i class="fa-solid fa-bell bell-icon"></i> 0</p>
+        <p class="lg1"><i class="fa-solid fa-user icon-align"></i> Account</p>
+        <p class="lg2"><i class="fa-solid fa-right-from-bracket icon-align"></i> Log out</p>
+      </div>
+    </div>
 
     <div class="cremats">
       <div class="h">
@@ -42,100 +41,74 @@
             <p class="t4">Create, search and track your requests</p>
           </div>
         </div>
-      <!-- Statistics Cards -->
-      <div class="B">
-        <div class="b1">
-          <div class="c1">Total Tasks</div>
-          <div class="c2">0</div>
-          <div class="c3">All requests</div>
-        </div>
-        <div class="b1">
-          <div class="c1">In progress</div>
-          <div class="c2">0</div>
-          <div class="c3">Currently working</div>
-        </div>
-        <div class="b1">
-          <div class="c1">Pending</div>
-          <div class="c2">0</div>
-          <div class="c3">Awaiting Action</div>
-        </div>
-        <div class="b1">
-          <div class="c1">Completed</div>
-          <div class="c2">0</div>
-          <div class="c3">Finished Tasks</div>
-        </div>
-      </div>
-
-      <div class="requestTable">
-        <!-- Assigned Requests Section -->
-      <div class="req">
-        <h4 class="t5">All Job Requests</h4>
-        <p class="t6">0 total requests</p>
-      </div>
-
-      <!-- Search Bar -->
-      <div class="search">
-        <div class="S">
-          <div class="s1">
-            <i class="ii"></i> <!-- Added search icon back -->
-            <input
-              type="text"
-              placeholder="Search requests..."
-              id="searchInput"
-            />
+        <div class="B">
+          <div class="b1">
+            <div class="c1">Total Tasks</div>
+            <div class="c2">0</div>
+            <div class="c3">All requests</div>
           </div>
-          <div class="dropdown-container">
-            <button class="btn" id="dropdownBtn">
-              <i class="fas fa-ellipsis-v btn1"></i> <!-- Added vertical ellipsis icon -->
-            </button>
-            <div class="dropdown-menu" id="dropdownMenu"> <!-- Moved dropdown menu outside the button -->
-              <a href="#" class="dropdown-item" data-status="pending">Pending</a>
-              <a href="#" class="dropdown-item" data-status="in-progress">In Progress</a>
-              <a href="#" class="dropdown-item" data-status="completed">Completed</a>
+          <div class="b1">
+            <div class="c1">In progress</div>
+            <div class="c2">0</div>
+            <div class="c3">Currently working</div>
+          </div>
+          <div class="b1">
+            <div class="c1">Pending</div>
+            <div class="c2">0</div>
+            <div class="c3">Awaiting Action</div>
+          </div>
+          <div class="b1">
+            <div class="c1">Completed</div>
+            <div class="c2">0</div>
+            <div class="c3">Finished Tasks</div>
+          </div>
+        </div>
+
+        <div class="requestTable">
+          <div class="req">
+            <h4 class="t5">All Job Requests</h4>
+            <p class="t6">0 total requests</p>
+          </div>
+
+          <div class="search">
+            <div class="S">
+              <div class="s1">
+                <input class="ii" type="text" placeholder="Search requests..." id="searchInput" />
+              </div>
+              <div class="dropdown-container">
+                <button class="btn" id="dropdownBtn">
+                  <i class="fas fa-ellipsis-v btn1"></i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                  <a href="#" class="dropdown-item" data-status="all">All</a>
+                  <a href="#" class="dropdown-item" data-status="pending">Pending</a>
+                  <a href="#" class="dropdown-item" data-status="in-progress">In Progress</a>
+                  <a href="#" class="dropdown-item" data-status="completed">Completed</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="T">
+            <div class="tt">
+              <table class="t1">
+                <thead>
+                  <tr class="th">
+                    <th class="th1">RQT</th>
+                    <th class="th1">Title</th>
+                    <th class="th1">Requester</th>
+                    <th class="th1">Status</th>
+                    <th class="th1">Date Created</th>
+                    <th class="th1">Details</th>
+                  </tr>
+                </thead>
+                <tbody class="requestsTableBody" id="requestsTableBody">
+                  <!-- Table body will be populated by JS -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Requests Table -->
-      <div class="T">
-        <div class="tt">
-          <table class="t1">
-            <thead>
-              <tr class="th">
-                <th class="th1">RQT</th>
-                <th class="th1">Title</th>
-                <th class="th1">Requester</th>
-                <th class="th1">Status</th>
-                <th class="th1">Date Created</th>
-                <th class="th1">Actions</th>
-                <th class="th1">Details</th>
-              </tr>
-            </thead>
-            <tbody id="requestsTableBody">
-              <!-- Table body is now empty -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-      </div>
-      
-    </div>
-
-    <!-- Modals/Dialogs (simplified as hidden divs) -->
-    <div id="statusUpdateDialog">
-      <div class="sud">
-        <h3>Update Status</h3>
-        <p>Status update dialog content here.</p>
-        <button onclick="closeDialog('statusUpdateDialog')">Close</button>
-      </div>
-    </div>
-
-    <div id="reportDialog">
-      <div class="rd">
-        <h3>Report</h3>
-        <p>Report dialog content here.</p>
-        <button onclick="closeDialog('reportDialog')">Close</button>
       </div>
     </div>
   </div>
