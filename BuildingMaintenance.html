@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -20,14 +20,23 @@
         <p class="t2">Centralized Requisition and Maintenance System</p>
       </div>
       <div class="lh">
-        <p class="t0">nickjose35</p>
+        <p class="t0"></p>
         <div>
           <p class="l1">building maintenance</p>
-          <p class="t01">nickjose35@gmail.com</p>  
-        </div> 
+          <p class="t01"></p>
+        </div>
       </div>
       <div class="lh1">
-        <p class="lg0"><i class="fa-solid fa-bell bell-icon"></i> 0</p>
+        <div class="notification-container notification-anchor"> 
+          <p class="lg0 notification-btn" id="notificationBtn">
+            <i class="fa-solid fa-bell bell-icon"></i> 
+            <span id="notificationCount">0</span>
+          </p>
+          <div class="notification-dropdown" id="notificationDropdown">
+            <div class="notification-header">New Requests</div>
+            <div id="notificationList"></div>
+          </div>
+        </div>
         <p class="lg1"><i class="fa-solid fa-user icon-align"></i> Account</p>
         <p class="lg2"><i class="fa-solid fa-right-from-bracket icon-align"></i> Log out</p>
       </div>
@@ -89,11 +98,25 @@
             </div>
           </div>
 
+          <div style="margin-bottom: 10px; text-align: right;">
+            <button id="deleteBtn" style="
+              display: none; 
+              padding: 8px 15px; 
+              background-color: #dc3545; 
+              color: white; 
+              border: none; 
+              border-radius: 4px; 
+              cursor: pointer;
+              font-weight: bold;">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
           <div class="T">
             <div class="tt">
               <table class="t1">
                 <thead>
                   <tr class="th">
+                    <th class="th1" style="width: 20px;">Select</th>
                     <th class="th1">RQT</th>
                     <th class="th1">Title</th>
                     <th class="th1">Requester</th>
@@ -102,9 +125,7 @@
                     <th class="th1">Details</th>
                   </tr>
                 </thead>
-                <tbody class="requestsTableBody" id="requestsTableBody">
-                  <!-- Table body will be populated by JS -->
-                </tbody>
+                <tbody class="requestsTableBody" id="requestsTableBody"></tbody>
               </table>
             </div>
           </div>
