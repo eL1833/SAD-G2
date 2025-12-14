@@ -1,151 +1,630 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Request Form</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/jobReq.css">
-</head>
-<body>
-  <!-- Header (Navigation Bar) -->
-  <div class="header">
-    <div class="h1">
-      <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
-      <div>
-        <h2 class="t1">CReMaTS</h2>
-        <p class="t2">Centralized Requisition and Maintenance System</p>
-      </div>
-      <div class="lh">
-        <p class="t0">name</p>
-        <div>
-          <p class="l1">building maintenance</p>
-          <p class="t01">email</p>
-        </div>
-      </div>
-      <div class="lh1">
-        <p class="lg0"><i class="fa-solid fa-bell bell-icon"></i> 0</p>
-        <p class="lg1" href="accountSettings.html"><i class="fa-solid fa-user icon-align"></i>  Account</p>
-        <p class="lg2" href="LoginDashboard.html"><i class="fa-solid fa-right-from-bracket icon-align"></i>  Log out</p>
-      </div>
-    </div>
-    <!-- Main Container (Form) -->
-  <div class="container">
-    <div class="ct">
-      <!-- Title -->
-      <div class="title-section">
-        <p class="h4">Job Request Form</p>
-        <p class="p">Centralized Requisition and Maintenance System</p>
-      </div>
-    </div>
-    <!-- Blue Banner -->
-    <div class="request-banner">
-      <div>
-        <div class="req-title" id="rqtId">Job Requests - RQT12345454645634</div>  <!-- Added id for dynamic update -->
-        <div class="req-dept">Department/Unit: Finance</div>
-      </div>
-      <div class="submission-box">
-        <p class="date1">Submitted:</p>
-        <p class="date" id="submittedDate">11/1/25, 2:19:16 PM</p>  <!-- Added id for dynamic update -->
-      </div>
-    </div>
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
 
-    <!-- Form Body -->
-    <div class="form-content">
-      
-      <!-- Items Section -->
-      <div class="items-header">
-        <h3>Items Requested:</h3>
-        <button class="btn-add" id="addItemBtn">+ Add Item</button>  <!-- Added id -->
-      </div>
+.header {
+  min-height: 100vh;
+  background-color: white;
+}
 
-      <div class="items-table-container" id="itemsTable">  <!-- Added id -->
-        <!-- Table Headers -->
-        <div class="items-grid">
-          <div class="grid-header">#</div>
-          <div class="grid-header">Item Name</div>
-          <div class="grid-header">Specifications</div>
-          <div class="grid-header">Unit of Measure</div>
-          <div class="grid-header">Quantity</div>
-        </div>
-        
-        <!-- Input Row -->
-        <div class="items-grid1" id="itemRow1">  <!-- Added id -->
-          <input type="text" class="input-field" value="1" readonly style="text-align: center;">
-          <input type="text" class="input-field" id="itemName1">
-          <input type="text" class="input-field" id="itemSpecs1">
-          <input type="text" class="input-field" id="itemUom1">
-          <input type="number" class="input-field" id="itemQty1">
-        </div>
-      </div>
+.hero__logo {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin-left: 1rem;
+  background: #ffffff;
+  padding: 1px;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
 
-      <!-- Purpose -->
-      <div class="form-group">
-        <label class="form-label">Purpose</label>
-        <input type="text" class="input-field1" id="purpose" placeholder="">
-      </div>
+.h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #277AFF;
+}
 
-      <!-- Requested By & Dept Head -->
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Requested By</label>
-          <input type="text" class="input-field" id="requestedBy" readonly>
-          <p class="helper-text">Auto-filled from your account</p>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Department Head</label>
-          <input type="text" class="input-field" id="deptHead">
-        </div>
-      </div>
+.lh {
+  display: flex;
+  margin-left: auto;
+}
 
-      <!-- Noted By -->
-      <label class="form-label">Noted by</label>
-      <div class="form-row">
-        <div class="form-group">
-          <input type="text" class="input-field" id="notedName" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <input type="text" class="input-field" id="notedTitle" placeholder="Title/Position">
-        </div>
-      </div>
+.lh1 {
+  display: flex;
+  margin: 0;
+}
 
-      <!-- Approved By -->
-      <label class="form-label">Approved by</label>
-      <div class="form-row">
-        <div class="form-group">
-          <input type="text" class="input-field" id="approvedName" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <input type="text" class="input-field" id="approvedTitle" placeholder="Title/Position">
-        </div>
-      </div>
+.t0 {
+  font-size: 0.775rem;
+  color: #f8eeff;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
-      <!-- Estimated Cost -->
-      <div class="form-group">
-        <label class="form-label">Estimated Cost</label>
-        <input type="text" class="input-field" id="estimatedCost">
-        <p class="helper-text">Optional - Enter the estimated total cost for this request</p>
-      </div>
+.t01 {
+  font-size: 0.775rem;
+  color: #f8eeff;
+  margin-top: 0;
+  margin-bottom: 5px;
+  text-align: right;
+}
 
-      <!-- Warning Box -->
-      <div class="warning-box">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <span class="warning-text">Please ensure all required fields (*) are filled out accurately. This will help us process your request more efficiently.</span>
-      </div>
+.t1 {
+  color: #f8eeff;
+  margin-bottom: 5px;
+}
 
-    </div>
+.t2 {
+  font-size: 0.875rem;
+  color: #f8eeff;
+  margin-top: 5px;
+}
 
-    <!-- Success Message (hidden by default) -->
-    <div id="successMessage" class="success-message" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px; text-align: center;">
-      Request submitted successfully!
-    </div>
-    <!-- Footer Buttons -->
-    <div class="form-footer">
-      <button class="btn-cancel" id="cancelBtn">Cancel</button>
-      <button class="btn-submit" id="submitBtn" type="button">Submit Request</button>
-    </div>
-  </div>
+.l1 {
+  font-size: 0.675rem;
+  margin-right: 0;
+  background-color: #f8eeff;
+  padding: 3px;
+  margin-left: 5px;
+  margin-bottom: 0;
+  border-radius: 0.5rem;
+  border: 2px solid #f8eeff;
+  color: #193CB8;
+}
 
-  <script src="js/jobReq.js"></script>
-</body>
-</html>
+.icon-align {
+  margin-right: 5px;
+}
+
+.bell-icon {
+  width: 13px;
+  height: 13px;
+  margin-right: 5px;
+}
+
+.lg0, .lg1, .lg2 {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  background-color: #f8eeff;
+  padding: 5px 10px;
+  margin-left: 10px;
+  border-radius: 0.5rem;
+  border: 2px solid #f8eeff;
+  color: #193CB8;
+  cursor: pointer;
+}
+
+.lg2 {
+  margin-right: 10px;
+}
+
+.lg0:hover, .lg1:hover, .lg2:hover {
+  color: #193CB8;
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+}
+
+.lg3 {
+  color: #BC5206;
+  background-color: #FFFAEB;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 0.5rem;
+  border: 1px solid #E17100;
+  font-size: 0.875rem;
+}
+
+.lg3:hover {
+  color: #BC5206;
+  background-color: #FFFAEB;
+  border: 1px solid #E17100;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.cremats {
+  max-width: 80rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.h {
+  margin-bottom: 0.5rem;
+}
+
+.h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.h3 {
+  margin-left: auto;
+}
+
+.t3 {
+  color: #111827;
+  margin-bottom: 0;
+}
+
+.t4 {
+  color: #6b7280;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.B {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+@media (min-width: 768px) {
+  .B {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.b1 {
+  background-color: white;
+  border: 1px solid #277AFF;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.b1:hover {
+  background-color: white;
+  border-color: #277AFF;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.c1 {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.c2 {
+  font-size: 2.25rem;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.c3 {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.requestTable {
+  background-color: white;
+  border: 1px solid #F7DBBF;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.req {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.t5 {
+  color: #111827;
+  margin-bottom: 3px;
+}
+
+.t6 {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.search {
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.sear {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.SB {
+  background-color: white;
+  border: 1px solid #F7DBBF;
+  border-radius: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.S {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.S0 {
+  margin: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.s1 {
+  position: relative;
+  flex: 1 1 0%;
+}
+
+.ii {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: #9ca3af;
+}
+
+#searchInput {
+  padding-left: 2.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #DBEAFE;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 97%;
+  height: 1.5rem;
+}
+
+.btn {
+  background-color: #f3f4f6;
+  border: 1px solid #DBEAFE;
+  padding-top: 0.3rem;
+  padding-right: 0.3rem;
+  padding-left: 0.3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.btn:hover {
+  background-color: #e5e7eb;
+  margin-right: 5px;
+}
+
+.btn1 {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #323c49;
+}
+
+.T {
+  border-bottom: 1px solid #F7DBBF;
+  overflow: hidden;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.tt {
+  overflow-x: auto;
+}
+
+.t1 {
+  width: 100%;
+}
+
+.th {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.th1 {
+  color: #374151;
+  padding: 4px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.requestsTableBody {
+  color: #000;
+  padding: 4px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 120px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.dropdown-item:hover {
+  background-color: #f9fafb;
+}
+
+/* New container for the notification button and dropdown */
+.notification-container {
+  position: relative; /* Makes the dropdown position relative to this container */
+  display: inline-block; /* Keeps it inline with the flex layout */
+}
+
+/* Updated notification button (removed position: relative from .notification-btn) */
+
+
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Positions it directly below the button */
+  right: 0; /* Aligns to the right edge of the container */
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.notification-dropdown-visible {
+  display: block;
+}
+
+.notification-dropdown-hidden {
+  display: none;
+}
+
+.notification-header {
+  padding: 0.5rem 1rem;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.notification-item {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #f9fafb;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 90%;
+  max-width: 650px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.modal-title-bar {
+  background-color: #277AFF;
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#modalTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.close-button {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.modal-row {
+  margin-bottom: 15px;
+}
+
+.modal-detail-value {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  color: #333;
+  min-height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.modal-textarea-like {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  color: #333;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.activity-log-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.log-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.log-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.log-icon {
+  font-size: 1.2rem;
+}
+
+.log-subtitle {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.log-container {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.log-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-left: 2px solid #ddd;
+  position: relative;
+  margin-left: 10px;
+}
+
+.log-item:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.log-item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ddd;
+  z-index: 10;
+}
+
+.log-item-completed::before {
+  background-color: #007bff;
+}
+
+.log-status-tag {
+  background-color: #f3f9ff;
+  color: #007bff;
+  border: 1px solid #007bff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 15px;
+  white-space: nowrap;
+}
+
+.log-details {
+  flex: 1;
+}
+
+.log-meta {
+  font-size: 0.85rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.log-comment {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+#modalCurrentStatus {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.current-status-tag[data-status="pending"] {
+  color: #A05200;
+  background-color: #FFFAEB;
+  border: 1px solid #E17100;
+}
+
+.current-status-tag[data-status="completed"] {
+  color: #008000;
+  background-color: #f0fff0;
+  border: 1px solid #008000;
+}
