@@ -66,55 +66,38 @@ body {
     color:#193CB8;
 }
 
-.lg0 {
+.icon-align {
+  margin-right: 5px;
+}
+
+.bell-icon {
+  width: 13px;
+  height: 13px;
+  margin-right: 5px;
+}
+
+.lg0, .lg1, .lg2 {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
     background-color: #f8eeff;
-    padding: 5px;
-    margin: 5px;
-    margin-left: 0px;
+    padding: 5px 10px;
+    margin-left: 10px; /* Use margin-left for spacing */
     border-radius: 0.5rem;
     border: 2px solid #f8eeff;
-}
-
-.lg-0 {
-    width: 13px;
-    height: 13px;
-    margin-left: 0px
-}
-
-.lg0:hover {
-    color: #193CB8;
-    background-color: white;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.lg1 {
-    background-color: #f8eeff;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 0.5rem;
-    border: 2px solid #f8eeff;
-    text-decoration: none; /* Remove underline */
-}
-
-.lg1:hover {
-    color: #193CB8;
-    background-color: white;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    color: #193CB8; /* Set default text color to match image */
+    cursor: pointer;
 }
 
 .lg2 {
-    background-color: #f8eeff;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 0.5rem;
-    border: 2px solid #f8eeff;
-    text-decoration: none; /* Remove underline */
+    margin-right: 10px;
 }
 
-.lg2:hover {
+.lg0:hover, .lg1:hover, .lg2:hover {
     color: #193CB8;
     background-color: white;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 2px solid white; /* Adjust border on hover */
 }
 
 .lg3{
