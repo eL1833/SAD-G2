@@ -1,0 +1,381 @@
+body {
+    margin: 0px;
+    font-family: "Inter", sans-serif;
+    /* Set a background color for the overall page */
+    background-color: #f7f7f7; 
+}
+
+/* --- Existing Header Styles Updated/Kept --- */
+
+.header {
+    /* Changed min-height from 100vh to auto to prevent header from taking up the full screen */
+    min-height: auto; 
+    background-color: white;
+}
+
+.hero__logo {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-left: 1rem;
+    background: #ffffff;
+    padding: 1px;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: #277AFF;
+} 
+
+.lh {
+    display: flex;
+    margin-left: auto;
+}
+
+.lh1 {
+    display: flex;
+    margin: 0px;
+}
+
+.t0 {
+    font-size: 0.775rem;
+    color: #f8eeff;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.t01 {
+    font-size: 0.775rem;
+    color: #f8eeff;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.l1 {
+    font-size: 0.675rem;
+    margin-right: 0px;
+    background-color: #f8eeff;
+    padding: 3px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    border-radius: 0.5rem;
+    border: 2px solid #f8eeff;
+    color:#193CB8;
+}
+
+.t1 {
+    color: #f8eeff; 
+    margin-bottom: 5px;
+}
+
+.t2 {
+    font-size: 0.875rem;
+    color: #f8eeff;
+    margin-top: 5px;
+}
+
+/* Header Icons and Buttons */
+.icon-align {
+    margin-right: 5px;
+}
+
+.bell-icon {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}
+
+.lg0, .lg1, .lg2 {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    background-color: #f8eeff;
+    padding: 5px 10px;
+    margin-left: 10px; /* Use margin-left for spacing */
+    border-radius: 0.5rem;
+    border: 2px solid #f8eeff;
+    color: #193CB8; /* Set default text color to match image */
+    cursor: pointer;
+}
+
+.lg2 {
+    margin-right: 10px;
+}
+
+.lg0:hover, .lg1:hover, .lg2:hover {
+    color: #193CB8;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 2px solid white; /* Adjust border on hover */
+}
+
+
+/* --- New Styles for Main Content --- */
+
+.main-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.details-card {
+    background-color: #FFFBEB;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1100px; /* Control the max width of the card */
+}
+
+.card-header {
+    margin-bottom: 0px;
+    border-bottom: 1px solid #eee; /* Subtle separation */
+    padding-bottom: 15px;
+    display: flex;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #000; /* Blue color */
+    font-weight: 500;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #E17100;
+    background-color: #ffffff;
+}
+
+.card-header h1 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.title {
+    margin-left: 10px;
+}
+
+.title h3 {
+    margin: 0px;
+}
+
+.title p {
+    margin: 5px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* --- Request Details Section --- */
+.request-details-section, .update-status-section {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.request-details-section {
+    margin-top: 0px;
+    padding: 0px;
+    border: 1px solid #E17100;
+    background-color: #FFFFFF;
+}
+
+.subcontent {
+    margin: 20px;
+}
+
+.detail-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #E17100;
+    background-color: #FFF8DB;
+}
+
+.detail-header-row h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.headertitle h2{
+    color: #BC5206;
+    padding-top: 10px;
+}
+
+.submitted-label {
+    font-size: 0.85rem;
+    color: #666;
+    background-color: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 0px;
+    border: 1px solid #E17100;
+}
+
+.submitted-text {
+    color: #333;
+    margin-right: 5px;
+}
+
+.request-meta {
+    font-size: 0.9rem;
+    color: #BC5206;
+    margin: 0px;
+    padding-bottom: 10px;
+}
+
+/* Form Fields */
+.detail-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.detail-row.two-fields {
+    flex-wrap: wrap; /* Ensure fields wrap on smaller screens */
+}
+
+.detail-field-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    flex: 1 1 100%; /* Takes up full width */
+}
+
+.half-width {
+    flex: 1 1 calc(50% - 10px); /* Takes up half width, accounting for gap */
+}
+
+label {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type="text"], textarea, select {
+    padding: 10px;
+    border: 1px solid #E17100;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.current-status-tag {
+    display: inline-block;
+    background-color: #ffeccf; /* Light orange/yellow for Pending */
+    color: #7d4400; /* Darker text */
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 1px solid #e17100;
+    margin: 0px;
+}
+
+/* --- Update Status Section --- */
+
+.update-status-section {
+    background-color: #fcfcfc;
+    padding: 0px;
+    border: 1px solid #E17100;
+}
+
+.update-status-section h4 {
+    font-size: 1.2rem;
+    margin: 0px;
+    color: #BC5206;
+}
+
+.updatecontent {
+    padding: 20px;
+}
+
+.updateheader {
+    background-color: #FFF8DB;
+    border-bottom: 1px solid #E17100;
+    padding: 10px;
+}
+
+.update-subtitle {
+    font-size: 0.9rem;
+    color: #BC5206;
+    margin: 0px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Alert Box */
+.tracking-alert {
+    background-color: #fffaeb;
+    color: #bc5206;
+    border: 1px solid #e17100;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+}
+
+.cancel-button {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.cancel-button:hover {
+    background-color: #f1f1f1;
+}
+
+.save-button {
+    background-color: #ff9100; /* Orange color from the image */
+    color: white;
+    border: 1px solid #ff9100;
+}
+
+.save-button:hover {
+    background-color: #e68200;
+}
