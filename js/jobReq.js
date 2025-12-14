@@ -1,4 +1,40 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Function to auto-fill the requester name and department from the logged-in user
+    function autoFillRequesterName() {
+        const currentUserEmail = sessionStorage.getItem('currentUserEmail');
+        
+        if (!currentUserEmail) {
+            console.warn('No user logged in. Requester name and department not auto-filled.');
+            return;
+        }
+        
+        // Load users from localStorage
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUser = users.find(u => u.email === currentUserEmail);
+        
+        if (currentUser) {
+            // Auto-fill the "Requested By" field
+            const requestedByField = document.getElementById('requestedBy');
+            if (requestedByField) {
+                requestedByField.value = currentUser.name;
+                requestedByField.readOnly = true; // Make it read-only to prevent changes
+            }
+            
+            // Auto-fill the "Department/Unit" in the banner
+            const reqDeptElement = document.getElementById('reqDept');
+            if (reqDeptElement && currentUser.department) {
+                reqDeptElement.textContent = `Department/Unit: ${currentUser.department}`;
+            } else if (reqDeptElement) {
+                reqDeptElement.textContent = 'Department/Unit: Unknown'; // Fallback if department is not set
+            }
+        } else {
+            console.error('Logged-in user not found in localStorage.');
+        }
+    }
+    
+    // Call the auto-fill function on page load
+    autoFillRequesterName();
+
     // Generate unique request code
     const generateRequestCode = () => {
         const now = new Date();
@@ -70,11 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Auto-fill "Requested By" (simulate from account)
-    document.getElementById('requestedBy').value = 'John Doe'; // Replace with actual logic
-
-    // Remove the form1 submission handler since there's no form with class 'form1' in the HTML
-    // The submitBtn handler below handles the submission
+    // Remove the old hardcoded line: document.getElementById('requestedBy').value = 'John Doe'; // Replaced with autoFillRequesterName()
 
     // Cancel button - Navigate back to Requester Dashboard
     const cancelBtn = document.querySelector('.btn-cancel');
@@ -86,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle Submit (fixed item collection and validation)
+    // Handle Submit (fixed item collection and validation, now includes department)
     document.getElementById('submitBtn').addEventListener('click', function() {
         // Collect data
         const items = [];
@@ -111,6 +143,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const approvedTitle = document.getElementById('approvedTitle').value.trim();
         const estimatedCost = document.getElementById('estimatedCost').value.trim();
 
+        // Get the requester's department from the logged-in user
+        const currentUserEmail = sessionStorage.getItem('currentUserEmail');
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUser = users.find(u => u.email === currentUserEmail);
+        const department = currentUser && currentUser.department ? currentUser.department : 'Unknown';
+
         // Validation (expanded to check more fields)
         if (!purpose) {
             alert('Please fill in the Purpose.');
@@ -129,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const rqtId = 'RQT' + Date.now();
         const submittedDate = new Date().toLocaleString();
 
-        // Create request object
+        // Create request object (now includes department)
         const request = {
             rqtId,
             title: purpose, // Use purpose as title
@@ -139,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
             details: 'View Details',
             items,
             requestedBy,
+            department,  // Added department
             deptHead,
             noted: { name: notedName, title: notedTitle },
             approved: { name: approvedName, title: approvedTitle },
