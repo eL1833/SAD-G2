@@ -8,31 +8,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Added FontAwesome for the ellipsis icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
   <div class="header">
-     <!-- Header -->
-     <div class="h1">
-          <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
-          <div>
-            <h2 class="t1">CReMaTS</h2>
-            <p class="t2">Centralized Requisition and Maintenance System</p>
-          </div>
-          <div class="lh">
-          <p class="t0">name</p>
-          <div>
-            <p class="l1">requester</p>
-            <p class="t01">email</p>  
-          </div> 
+    <div class="h1">
+      <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
+      <div>
+        <h2 class="t1">CReMaTS</h2>
+        <p class="t2">Centralized Requisition and Maintenance System</p>
+      </div>
+      <div class="lh">
+        <p class="t0"></p>
+        <div>
+          <p class="l1">requester</p>
+          <p class="t01"></p>
         </div>
-        <div class="lh1">
-          <p class="lg0"><i class="fa-solid fa-bell bell-icon"></i> 0</p>
-          <p class="lg1"><i class="fa-solid fa-user icon-align"></i> Account</p>
-          <p class="lg2"><i class="fa-solid fa-right-from-bracket icon-align"></i> Log out</p>
+        <div class="notification-container">
+          <p class="lg0 notification-btn" id="notificationBtn">
+            <i class="fa-solid fa-bell bell-icon"></i> 
+            <span id="notificationCount">0</span>
+          </p>
+          <div class="notification-dropdown" id="notificationDropdown">
+            <div class="notification-header">Request Updates</div>
+            <div id="notificationList"></div>
+          </div>
         </div>
       </div>
+      <div class="lh1">
+        <p class="lg1"><i class="fa-solid fa-user icon-align"></i> Account</p>
+        <p class="lg2"><i class="fa-solid fa-right-from-bracket icon-align"></i> Log out</p>
+      </div>
+    </div>
 
     <div class="cremats">
       <div class="h">
@@ -46,119 +54,104 @@
           </div>
         </div>
 
-      <div class="SB">
-        <!-- Search Bar -->
-        <div class="sear">
+        <div class="SB">
+          <div class="sear">
             <div class="S0">
-            <div class="s1">
-                <i class="ii"></i> <!-- Added search icon back -->
-                <input
-                type="text"
-                placeholder="Search requests..."
-                id="searchInput"
-                />
-            </div>
-            <div class="dropdown-container">
+              <div class="s1">
+                <i class="ii"></i>
+                <input type="text" placeholder="Search requests..." id="searchInput" />
+              </div>
+              <div class="dropdown-container">
                 <button class="btn" id="dropdownBtn">
-                <i class="fas fa-ellipsis-v btn1"></i> <!-- Added vertical ellipsis icon -->
+                  <i class="fas fa-ellipsis-v btn1"></i>
                 </button>
-                <div class="dropdown-menu" id="dropdownMenu"> <!-- Moved dropdown menu outside the button -->
-                <a href="#" class="dropdown-item" data-status="pending">Pending</a>
-                <a href="#" class="dropdown-item" data-status="in-progress">In Progress</a>
-                <a href="#" class="dropdown-item" data-status="completed">Completed</a>
+                <div class="dropdown-menu" id="dropdownMenu">
+                  <a href="#" class="dropdown-item" data-status="all">All</a>
+                  <a href="#" class="dropdown-item" data-status="pending">Pending</a>
+                  <a href="#" class="dropdown-item" data-status="in progress">In Progress</a>
+                  <a href="#" class="dropdown-item" data-status="completed">Completed</a>
                 </div>
-            </div>
-            </div>
-        </div>
-      </div>  
-
-      <div class="requestTable">
-        <!-- Assigned Requests Section -->
-      <div class="req">
-        <h4 class="t5">Request History</h4>
-        <p class="t6" id="totalRequests">0 total requests</p>  <!-- Added id -->
-      </div>
-      
-     <!-- Requests Table -->
-      <div class="T">
-        <div class="tt">
-          <table class="t1">
-            <thead>
-              <tr class="th">
-                <th class="th1">Select</th>  <!-- New column for checkboxes -->
-                <th class="th1">RQT</th>
-                <th class="th1">Title</th>
-                <th class="th1">Status</th>
-                <th class="th1">Date Requested</th>
-                <th class="th1">Details</th>
-              </tr>
-            </thead>
-            <tbody class="requestsTableBody" id="requestsTableBody">
-              <!-- Table body is now empty -->
-            </tbody>
-          </table>
-        </div>
-        <!-- Delete button with icon, hidden by default -->
-        <button id="deleteBtn" style="display: none; margin-top: 10px; background-color: #dc3545; color: white; border: none; padding: 8px 16px; cursor: pointer;" title="Delete Selected">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-    <div id="viewRequestModal" class="modal">
-      <div class="modal-content">
-        <div>
-          <div class="modal-header">
-            <div class="modal-title-bar">
-              <h2 id="modalTitle"></h2>
-                <span class="close-button" onclick="closeDialog('viewRequestModal')">&times;</span>
+              </div>
             </div>
           </div>
-            
+        </div>
+
+        <div class="requestTable">
+          <div class="req">
+            <h4 class="t5">Request History</h4>
+            <p class="t6" id="totalRequests">0 total requests</p>
+          </div>
+          <div class="T">
+            <div class="tt">
+              <table class="t1">
+                <thead>
+                  <tr class="th">
+                    <th class="th1">Select</th>
+                    <th class="th1">RQT</th>
+                    <th class="th1">Title</th>
+                    <th class="th1">Status</th>
+                    <th class="th1">Date Requested</th>
+                    <th class="th1">Details</th>
+                  </tr>
+                </thead>
+                <tbody class="requestsTableBody" id="requestsTableBody"></tbody>
+              </table>
+            </div>
+            <button id="deleteBtn" style="display: none; margin-top: 10px; background-color: #dc3545; color: white; border: none; padding: 8px 16px; cursor: pointer;" title="Delete Selected">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="viewRequestModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title-bar">
+            <h2 id="modalTitle"></h2>
+            <span class="close-button" onclick="closeDialog('viewRequestModal')">&times;</span>
+          </div>
           <div class="modal-body">
             <div class="detail-row modal-row">
               <div class="detail-field-group full-width">
                 <label>Current Status</label>
                 <p id="modalCurrentStatus" class="current-status-tag"></p>
               </div>
-          </div>
-
-          <div class="detail-row modal-row two-fields">
-            <div class="detail-field-group half-width">
-              <label>Submitted</label>
+            </div>
+            <div class="detail-row modal-row two-fields">
+              <div class="detail-field-group half-width">
+                <label>Submitted</label>
                 <p id="modalSubmittedDate" class="modal-detail-value"></p>
+              </div>
+              <div class="detail-field-group half-width">
+                <label>Last Updated</label>
+                <p id="modalLastUpdated" class="modal-detail-value"></p>
+              </div>
             </div>
-            <div class="detail-field-group half-width">
-              <label>Last Updated</label>
-              <p id="modalLastUpdated" class="modal-detail-value"></p>
+            <div class="detail-row modal-row two-fields">
+              <div class="detail-field-group half-width">
+                <label>Department Head</label>
+                <p id="modalDepartmentHead" class="modal-detail-value"></p>
+              </div>
+              <div class="detail-field-group half-width">
+                <label>Estimated Cost</label>
+                <p id="modalEstimatedCost" class="modal-detail-value"></p>
+              </div>
             </div>
-          </div>
-
-          <div class="detail-row modal-row two-fields">
-            <div class="detail-field-group half-width">
-              <label>Department Head</label>
-              <p id="modalDepartmentHead" class="modal-detail-value"></p>
-            </div>
-            <div class="detail-field-group half-width">
-              <label>Estimated Cost</label>
-              <p id="modalEstimatedCost" class="modal-detail-value"></p>
-            </div>
-          </div>
-
-          <div class="detail-row modal-row">
-            <div class="detail-field-group full-width">
-              <label>Full Description</label>
+            <div class="detail-row modal-row">
+              <div class="detail-field-group full-width">
+                <label>Full Description</label>
                 <div id="modalDescription" class="modal-textarea-like"></div>
               </div>
             </div>
-
             <div class="activity-log-section">
               <div class="log-header">
                 <i class="fa-solid fa-clock log-icon"></i>
                 <h3>Status Updates & Activity Log</h3>
               </div>
               <p class="log-subtitle">Track all updates made by maintenance, custodian, and purchasing staff</p>
-              <div id="activityLog" class="log-container">
-              </div>
+              <div id="activityLog" class="log-container"></div>
             </div>
           </div>
         </div>
