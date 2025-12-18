@@ -1,46 +1,24 @@
-// ==========================================================
-// File: requester.js
-// Description: Logic for the Requester Dashboard including request management, 
-// notifications, search, filtering, and multi-criteria sorting.
-// ==========================================================
-
-// Global variable for requests
 let allRequests = [];
 
-// ==========================================================
-// 🔔 NOTIFICATION FUNCTIONS
-// ==========================================================
-
-/**
- * Marks a specific request's update as seen/read, removes it from the notification
- * list, updates global state and localStorage, and reloads the notifications.
- */
 function markNotificationAsRead(rqtId) {
     const index = allRequests.findIndex(r => r.rqtId === rqtId);
     
     if (index !== -1) {
-        // Set the last seen date to the latest activity log entry's date
         if (allRequests[index].activityLog && allRequests[index].activityLog.length > 0) {
             const latestLog = allRequests[index].activityLog[allRequests[index].activityLog.length - 1];
             allRequests[index].lastNotificationSeenDate = latestLog.date;
         }
         
-        // Update localStorage immediately
         localStorage.setItem('jobRequests', JSON.stringify(allRequests));
         
-        // Reload notifications to update the count and list instantly
         loadNotifications(); 
         
-        // Ensure dropdown is closed
         const notificationDropdown = document.getElementById('notificationDropdown');
         notificationDropdown.classList.remove('notification-dropdown-visible');
         notificationDropdown.classList.add('notification-dropdown-hidden');
     }
 }
 
-/**
- * Loads request status updates into the notification dropdown.
- */
 function loadNotifications() {
     const updatedRequests = allRequests.filter(r => {
         if (!r.activityLog || r.activityLog.length === 0) return false;
@@ -87,14 +65,6 @@ function loadNotifications() {
     }
 }
 
-// ==========================================================
-// 📋 REQUEST TABLE & SORTING/FILTERING FUNCTIONS
-// ==========================================================
-
-/**
- * Normalizes status variations to a standard form for sorting and filtering.
- * Treats "maintenance completed", "custodian completed", "complete", etc., as "completed".
- */
 function normalizeStatus(status) {
     const lower = status.toLowerCase().trim();
     if (lower.includes('completed') || lower === 'complete') {
@@ -103,11 +73,7 @@ function normalizeStatus(status) {
     return lower;
 }
 
-/**
- * Custom sort function to sort requests by status priority, and then by date.
- */
 function sortByStatusPriority(requests) {
-    // Define the order of status priority (lower number = higher priority)
     const statusOrder = {
         'pending': 1,
         'in progress': 2,
@@ -115,35 +81,25 @@ function sortByStatusPriority(requests) {
     };
 
     requests.sort((a, b) => {
-        // Normalize status for comparison
         const statusA = normalizeStatus(a.status);
         const statusB = normalizeStatus(b.status);
         
-        // Get the defined priority, defaulting to a low priority (99) if not found
         const priorityA = statusOrder[statusA] || 99;
         const priorityB = statusOrder[statusB] || 99;
 
-        // 1. Sort by Status Priority
         if (priorityA !== priorityB) {
-            return priorityA - priorityB; // Ascending priority (1, 2, 3...)
+            return priorityA - priorityB; 
         }
 
-        // 2. If status is the same, sort by Date (Newest first)
-        return new Date(b.date) - new Date(a.date); // Descending date
+        return new Date(b.date) - new Date(a.date);
     });
 
     return requests;
 }
 
-/**
- * Loads and displays requests from localStorage with optional filters and sorting.
- * Filters requests to only show those made by the logged-in user.
- */
 function loadRequests(searchTerm = '', statusFilter = '') {
-    // 1. Load all data from storage
     const allStoredRequests = JSON.parse(localStorage.getItem('jobRequests')) || [];
 
-    // 2. Get the logged-in user's name to filter requests
     const currentUserEmail = sessionStorage.getItem('currentUserEmail');
     let currentUserName = null;
     if (currentUserEmail) {
@@ -152,10 +108,8 @@ function loadRequests(searchTerm = '', statusFilter = '') {
         currentUserName = currentUser ? currentUser.name : null;
     }
 
-    // 3. Filter requests to only those requested by the logged-in user
     allRequests = allStoredRequests.filter(request => request.requestedBy === currentUserName);
 
-    // --- START: Inject Sample Data if localStorage is empty for testing ---
     if (allStoredRequests.length === 0) {
         const sampleData = [
             { rqtId: 'RQT1765000190438', title: 'Dehumidifier Repair', status: 'Pending', date: '12/6/2025, 1:49:50 PM', lastUpdated: '12/6/2025, 1:49:50 PM', deptHead: 'IT Dept', estimatedCost: 'N/A', description: 'Needs inspection.', items: [{name: 'Inspection', qty: 1, uom: 'unit'}], requestedBy: currentUserName || 'John Doe', activityLog: [], lastNotificationSeenDate: null },
@@ -170,22 +124,18 @@ function loadRequests(searchTerm = '', statusFilter = '') {
         allRequests = sampleData.filter(request => request.requestedBy === currentUserName);
         localStorage.setItem('jobRequests', JSON.stringify(sampleData)); 
     }
-    // --- END: Inject Sample Data ---
 
-    // Ensure lastNotificationSeenDate is initialized for all requests (for backward compatibility)
     allRequests.forEach(request => {
         if (request.lastNotificationSeenDate === undefined) {
             request.lastNotificationSeenDate = null;
         }
     });
 
-    // 4. Filter requests based on search term and status filter
     let filteredRequests = allRequests.filter(request => {
         const matchesSearch = !searchTerm || 
             request.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
             request.rqtId.toLowerCase().includes(searchTerm.toLowerCase());
         
-        // Normalize status for filtering to recognize "maintenance completed", "custodian completed", etc., as "completed"
         const normalizedRequestStatus = normalizeStatus(request.status);
         const statusFilterLower = statusFilter.toLowerCase();
 
@@ -194,10 +144,8 @@ function loadRequests(searchTerm = '', statusFilter = '') {
         return matchesSearch && matchesStatus;
     });
     
-    // 5. Apply Multi-criteria Sort (Status Priority then Date)
     filteredRequests = sortByStatusPriority(filteredRequests);
 
-    // 6. Update the table display
     const tbody = document.getElementById('requestsTableBody');
     tbody.innerHTML = '';
     
@@ -220,9 +168,6 @@ function loadRequests(searchTerm = '', statusFilter = '') {
     loadNotifications();
 }
 
-/**
- * Function to view details in the modal.
- */
 function viewDetails(rqtId) {
     const request = allRequests.find(r => r.rqtId === rqtId);
     
@@ -262,9 +207,6 @@ function viewDetails(rqtId) {
     }
 }
 
-/**
- * Function to delete selected requests
- */
 function deleteSelectedRequests() {
     const selectedCheckboxes = document.querySelectorAll('.select-checkbox:checked');
     if (selectedCheckboxes.length === 0) return;
@@ -277,10 +219,6 @@ function deleteSelectedRequests() {
     localStorage.setItem('jobRequests', JSON.stringify(storedRequests));
     loadRequests();
 }
-
-// ==========================================================
-// 🧭 NAVIGATION & UTILITY FUNCTIONS 
-// ==========================================================
 
 function navigateToAccountSettings() {
     window.location.href = 'AccountSettingsDashboard.html';
@@ -300,20 +238,13 @@ function closeDialog(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
 
-// ==========================================================
-// ⚙️ EVENT LISTENERS (DOM Ready)
-// ==========================================================
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Load initial data
     loadRequests(); 
     
-    // --- Header Nav Listeners ---
     document.querySelector('.lg1').addEventListener('click', navigateToAccountSettings);
     document.querySelector('.lg2').addEventListener('click', handleLogout);
     document.querySelector('.lg3').addEventListener('click', navigateToJobRequestForm);
 
-    // --- Notification Dropdown Toggle ---
     const notificationBtn = document.getElementById('notificationBtn');
     const notificationDropdown = document.getElementById('notificationDropdown');
     
@@ -333,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
         if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
             notificationDropdown.classList.remove('notification-dropdown-visible');
@@ -341,16 +271,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // --- Search and Filter/Sort Logic ---
     const searchInput = document.getElementById('searchInput');
-    let currentStatusFilter = ''; // This variable holds the status used for filtering/sorting
+    let currentStatusFilter = ''; 
     
     searchInput.addEventListener('input', function() {
         const searchTerm = searchInput.value.trim();
         loadRequests(searchTerm, currentStatusFilter);
     });
     
-    // Dropdown toggle for status filter/sort
     const dropdownBtn = document.getElementById('dropdownBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     
@@ -362,12 +290,10 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     });
     
-    // Status filter/sort functionality
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     dropdownItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
-            // This status selection drives BOTH filtering and sorting
             currentStatusFilter = this.getAttribute('data-status'); 
             const searchTerm = searchInput.value.trim();
             
@@ -376,14 +302,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Close status dropdown when clicking outside
     document.addEventListener('click', function(e) {
         if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
             dropdownMenu.style.display = 'none';
         }
     });
     
-    // --- Selection and Delete Functionality ---
     const tbody = document.getElementById('requestsTableBody');
     const deleteBtn = document.getElementById('deleteBtn');
     
