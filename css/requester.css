@@ -38,21 +38,6 @@ body {
   margin: 0;
 }
 
-.t0 {
-  font-size: 0.775rem;
-  color: #f8eeff;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.t01 {
-  font-size: 0.775rem;
-  color: #f8eeff;
-  margin-top: 0;
-  margin-bottom: 5px;
-  text-align: right;
-}
-
 .t1 {
   color: #f8eeff;
   margin-bottom: 5px;
@@ -379,20 +364,16 @@ body {
   background-color: #f9fafb;
 }
 
-/* New container for the notification button and dropdown */
 .notification-container {
-  position: relative; /* Makes the dropdown position relative to this container */
-  display: inline-block; /* Keeps it inline with the flex layout */
+  position: relative; 
+  display: inline-block; 
 }
-
-/* Updated notification button (removed position: relative from .notification-btn) */
-
 
 .notification-dropdown {
   display: none;
   position: absolute;
-  top: 100%; /* Positions it directly below the button */
-  right: 0; /* Aligns to the right edge of the container */
+  top: 100%; 
+  right: 0; 
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
