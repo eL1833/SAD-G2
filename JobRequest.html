@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/jobReq.css">
 </head>
 <body>
-  <!-- Header (Navigation Bar) -->
+  
   <div class="header">
     <div class="h1">
       <img src="img/crm-logo.jpg" alt="CRM logo" class="hero__logo">
@@ -29,7 +29,7 @@
         <p class="lg2" href="LoginDashboard.html"><i class="fa-solid fa-right-from-bracket icon-align"></i>  Log out</p>
       </div>
     </div>
-    <!-- Main Container (Form) -->
+   
   <div class="container">
     <div class="ct">
       <!-- Title -->
@@ -38,29 +38,27 @@
         <p class="p">Centralized Requisition and Maintenance System</p>
       </div>
     </div>
-    <!-- Blue Banner -->
+   
     <div class="request-banner">
       <div>
-        <div class="req-title" id="rqtId">Job Requests - RQT12345454645634</div>  <!-- Added id for dynamic update -->
-        <div class="req-dept" id="reqDept">Department/Unit: </div>  <!-- Added id for dynamic update -->
+        <div class="req-title" id="rqtId">Job Requests - RQT12345454645634</div>  
+        <div class="req-dept" id="reqDept">Department/Unit: </div>  
       </div>
       <div class="submission-box">
         <p class="date1">Submitted:</p>
-        <p class="date" id="submittedDate">11/1/25, 2:19:16 PM</p>  <!-- Added id for dynamic update -->
+        <p class="date" id="submittedDate">11/1/25, 2:19:16 PM</p>  
       </div>
     </div>
 
-    <!-- Form Body -->
     <div class="form-content">
-      
-      <!-- Items Section -->
+ 
       <div class="items-header">
         <h3>Items Requested:</h3>
-        <button class="btn-add" id="addItemBtn">+ Add Item</button>  <!-- Added id -->
+        <button class="btn-add" id="addItemBtn">+ Add Item</button>  
       </div>
 
-      <div class="items-table-container" id="itemsTable">  <!-- Added id -->
-        <!-- Table Headers -->
+      <div class="items-table-container" id="itemsTable"> 
+        
         <div class="items-grid">
           <div class="grid-header">#</div>
           <div class="grid-header">Item Name</div>
@@ -69,8 +67,7 @@
           <div class="grid-header">Quantity</div>
         </div>
         
-        <!-- Input Row -->
-        <div class="items-grid1" id="itemRow1">  <!-- Added id -->
+        <div class="items-grid1" id="itemRow1"> 
           <input type="text" class="input-field" value="1" readonly style="text-align: center;">
           <input type="text" class="input-field" id="itemName1">
           <input type="text" class="input-field" id="itemSpecs1">
@@ -79,13 +76,11 @@
         </div>
       </div>
 
-      <!-- Purpose -->
       <div class="form-group">
         <label class="form-label">Purpose</label>
         <input type="text" class="input-field1" id="purpose" placeholder="">
       </div>
 
-      <!-- Requested By & Dept Head -->
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Requested By</label>
@@ -98,7 +93,6 @@
         </div>
       </div>
 
-      <!-- Noted By -->
       <label class="form-label">Noted by</label>
       <div class="form-row">
         <div class="form-group">
@@ -109,7 +103,6 @@
         </div>
       </div>
 
-      <!-- Approved By -->
       <label class="form-label">Approved by</label>
       <div class="form-row">
         <div class="form-group">
@@ -120,14 +113,12 @@
         </div>
       </div>
 
-      <!-- Estimated Cost -->
       <div class="form-group">
         <label class="form-label">Estimated Cost</label>
         <input type="text" class="input-field" id="estimatedCost">
         <p class="helper-text">Optional - Enter the estimated total cost for this request</p>
       </div>
 
-      <!-- Warning Box -->
       <div class="warning-box">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <span class="warning-text">Please ensure all fields are filled out accurately. This will help us process your request more efficiently.</span>
@@ -135,11 +126,10 @@
 
     </div>
 
-    <!-- Success Message (hidden by default) -->
     <div id="successMessage" class="success-message" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px; text-align: center;">
       Request submitted successfully!
     </div>
-    <!-- Footer Buttons -->
+ 
     <div class="form-footer">
       <button class="btn-cancel" id="cancelBtn">Cancel</button>
       <button class="btn-submit" id="submitBtn" type="button">Submit Request</button>
