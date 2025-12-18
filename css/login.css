@@ -13,7 +13,6 @@ html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;backg
 
 .page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;width:100%}
 
-/* blue header that matches screenshot */
 .hero{
   width:100%;
   max-width:420px;
@@ -26,7 +25,6 @@ html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;backg
   box-shadow: inset 0 -6px 12px rgba(0,0,0,0.03);
 }
 
-/* logo in the centre of the blue header */
 .hero__logo{
   width:72px;
   height:72px;
@@ -40,11 +38,9 @@ html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;backg
   border:2px solid rgba(255,255,255,0.12);
 }
 
-/* welcome + subtitle styling */
 .hero__title{margin:0;font-size:20px;font-weight:600;letter-spacing:0.2px;color:#fff}
 .hero__sub{margin:6px 0 0;color:rgba(255,255,255,0.95);font-size:14px}
 
-/* card sits immediately under the blue header */
 .card{
   width:100%;
   max-width:420px;
@@ -56,7 +52,6 @@ html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;backg
   margin-top:0;
 }
 
-/* form fields */
 .signin-form{display:flex;flex-direction:column;gap:14px}
 .field{display:block}
 .field__label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
@@ -72,9 +67,8 @@ html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;backg
 }
 .field__input:focus{border-color:var(--blue);box-shadow:0 8px 20px rgba(47,110,246,0.08)}
 
-/* wrapper for password field to hold input and toggle button */
 .field__wrapper{position:relative;display:flex;align-items:center}
-.field__wrapper .field__input{flex:1;padding-right:40px} /* space for the button */
+.field__wrapper .field__input{flex:1;padding-right:40px} 
 .field__toggle{
   position:absolute;
   right:10px;
@@ -90,14 +84,12 @@ html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;backg
 }
 .toggle-icon{width:100%;height:100%;object-fit:contain}
 
-/* primary full-width button */
 .btn{display:inline-block;padding:12px 16px;border-radius:10px;font-weight:600;cursor:pointer;border:none}
 .btn--primary{background:var(--blue);color:#fff;width:100%;box-shadow:0 10px 22px rgba(47,110,246,0.12)}
 
 .card__footer{margin:12px 0 0;text-align:center;color:var(--muted);font-size:13px}
 .card__footer a{color:var(--blue);text-decoration:none;font-weight:600}
 
-/* small screens */
 @media (max-width:480px){
   .hero{padding:22px 16px}
   .card{padding:16px}
