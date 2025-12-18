@@ -82,10 +82,10 @@ body {
     font-size: 0.875rem;
     background-color: #f8eeff;
     padding: 5px 10px;
-    margin-left: 10px; /* Use margin-left for spacing */
+    margin-left: 10px; 
     border-radius: 0.5rem;
     border: 2px solid #f8eeff;
-    color: #193CB8; /* Set default text color to match image */
+    color: #193CB8; 
     cursor: pointer;
 }
 
@@ -97,7 +97,7 @@ body {
     color: #193CB8;
     background-color: white;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border: 2px solid white; /* Adjust border on hover */
+    border: 2px solid white; 
 }
 
 .lg3{
@@ -181,10 +181,7 @@ body {
     color: #6b7280;
     margin: 0px;
 }
-/* Container */
 
-
-/* Request Banner */
 .request-banner {
   background-color: #1C69FF;
   color: white;
@@ -228,13 +225,11 @@ body {
   color: #000;
 }
 
-/* Form Content */
 .form-content {
   padding: 1rem;
   border: 1px solid #BEDBFF;
 }
 
-/* Items Section */
 .items-header {
   display: flex;
   justify-content: space-between;
@@ -301,8 +296,8 @@ body {
   border: 1px solid #BEDBFF;
   border-radius: 4px;
   font-size: 0.875rem;
-  width: 100%; /* Fill the available space */
-  box-sizing: border-box; /* Include padding and border in width */
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
 .input-field1 {
@@ -310,11 +305,10 @@ body {
   border: 1px solid #BEDBFF;
   border-radius: 4px;
   font-size: 0.875rem;
-  width: 100%; /* Fill the available space */
-  box-sizing: border-box; /* Include padding and border in width */
+  width: 100%; 
+  box-sizing: border-box;
 }
 
-/* Form Groups */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -340,7 +334,6 @@ body {
   margin-top: 0.25rem;
 }
 
-/* Warning Box */
 .warning-box {
   display: flex;
   align-items: center;
@@ -361,7 +354,6 @@ body {
   color: #595757;
 }
 
-/* Form Footer */
 .form-footer {
   display: flex;
   justify-content: flex-end;
@@ -399,7 +391,6 @@ body {
   background-color: #2563eb;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .h1 {
     flex-direction: column;
