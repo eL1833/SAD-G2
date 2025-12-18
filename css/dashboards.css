@@ -1,15 +1,7 @@
-/* ================================================= */
-/* RESET AND BASE STYLES */
-/* ================================================= */
-
 body {
     margin: 0px;
     font-family: "Inter", sans-serif;
 }
-
-/* ================================================= */
-/* HEADER STYLES */
-/* ================================================= */
 
 .header {
     min-height: 100vh;
@@ -105,7 +97,6 @@ body {
     border: 2px solid #f8eeff;
     color: #193CB8;
     cursor: pointer;
-    /* FIX: Set position relative for notification dropdown anchoring (still needed for lg0 if used directly) */
     position: relative; 
 }
 
@@ -137,10 +128,6 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* ================================================= */
-/* MAIN CONTENT STYLES */
-/* ================================================= */
-
 .cremats {
     max-width: 80rem;
     margin-left: 1rem;
@@ -171,10 +158,6 @@ body {
     margin-top: 5px;
     margin-bottom: 30px;
 }
-
-/* ================================================= */
-/* STATISTICS CARDS STYLES */
-/* ================================================= */
 
 .B {
     display: grid;
@@ -221,10 +204,6 @@ body {
     font-size: 0.75rem;
     color: #6b7280;
 }
-
-/* ================================================= */
-/* REQUEST TABLE STYLES */
-/* ================================================= */
 
 .requestTable {
     background-color: white;
@@ -368,10 +347,6 @@ body {
     font-size: 13px;
 }
 
-/* ================================================= */
-/* DROPDOWN STYLES */
-/* ================================================= */
-
 .dropdown-container {
     position: relative;
 }
@@ -405,22 +380,18 @@ body {
     background-color: #f9fafb;
 }
 
-/* FIX: Ensure the notification container is the relative anchor */
 .notification-container.notification-anchor {
     position: relative;
     display: inline-block;
 }
 
-/* --- UPDATED NOTIFICATION DROPDOWN STYLES --- */
 .notification-dropdown {
     position: absolute;
     top: 100%;
     right: 0;
     background: white;
-    /* Updated border color to match the subtle color of .dropdown-menu */
     border: 1px solid #e5e7eb; 
-    border-radius: 0.5rem; /* Increased border radius for a softer look */
-    /* Updated box-shadow to match the subtle shadow of .dropdown-menu */
+    border-radius: 0.5rem; 
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
     width: 300px;
     max-height: 300px;
@@ -437,38 +408,29 @@ body {
     display: block;
 }
 
-/* 💡 EDITED: Styles to make the header look like standard dropdown text */
 .notification-header {
-    padding: 0.5rem 1rem; /* Match dropdown-item padding */
-    background: white; /* Removed gray background */
-    font-weight: 600; /* Semibold text */
-    /* Used the same border as the .dropdown-menu items often have */
+    padding: 0.5rem 1rem; 
+    background: white; 
+    font-weight: 600; 
     border-bottom: 1px solid #e5e7eb; 
     color: #374151;
     font-size: 0.875rem;
 }
 
-/* 💡 EDITED: Styles to make the items look like clean list items (like dropdown-item) */
 .notification-item {
     display: block;
     padding: 0.5rem 1rem;
     color: #374151;
     text-decoration: none;
     font-size: 0.875rem;
-    border-bottom: none; /* Removed separating lines between items */
-    white-space: normal; /* Allows text to wrap */
+    border-bottom: none;
+    white-space: normal; 
 }
 
 .notification-item:hover {
-    /* Used the same hover color as .dropdown-item */
+  
     background: #f9fafb; 
 }
-/* --- END UPDATED NOTIFICATION DROPDOWN STYLES --- */
-
-
-/* ================================================= */
-/* MODAL STYLES */
-/* ================================================= */
 
 #statusUpdateDialog {
     position: fixed;
@@ -506,7 +468,6 @@ body {
     padding: 1.5rem;
 }
 
-/* Status Update Dialog Overrides */
 #statusUpdateDialog .modal-content {
     max-width: 450px;
     width: 90%;
@@ -596,7 +557,6 @@ body {
     background-color: #f0f0f0;
 }
 
-/* Custom Modal Styles */
 .modal-overlay {
     display: none;
     position: fixed;
