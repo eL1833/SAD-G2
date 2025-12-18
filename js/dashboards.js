@@ -1,63 +1,37 @@
-// ==========================================================
-// 📋 DASHBOARD SCRIPT START
-// ==========================================================
-
-// Global variable for requests
 let allRequests = [];
 
-// --- Simple UI Handlers (Account, Logout) ---
-
-// Account button functionality (navigates to account settings)
 document.querySelector('.lg1').addEventListener('click', function() {
     window.location.href = 'AccountSettingsDashboard.html';
 });
 
-// Logout functionality (with confirmation) - Updated to navigate to 'Log-in dashboard'
 document.querySelector('.lg2').addEventListener('click', function() {
     if (confirm('Are you sure you want to log out?')) {
         window.location.href = 'LoginDashboard.html';
     }
 });
 
-// ==========================================================
-// 🗑️ DELETE FUNCTIONALITY
-// ==========================================================
-
-/**
- * Function to delete selected requests from localStorage.
- * This function is now in the global scope for easier calling.
- */
 function deleteSelectedRequests() {
     const selectedCheckboxes = document.querySelectorAll('.select-checkbox:checked');
     const deleteBtn = document.getElementById('deleteBtn');
 
     if (selectedCheckboxes.length === 0) return;
     
-    // Confirmation dialog
     if (!confirm(`Are you sure you want to delete ${selectedCheckboxes.length} selected request(s)? This action cannot be undone.`)) return;
     
-    // Extract RQT IDs from selected checkboxes
     const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.getAttribute('data-rqt-id'));
     
-    // Filter out the selected requests from the global list
     allRequests = allRequests.filter(request => !selectedIds.includes(request.rqtId));
     
-    // Save the filtered list back to localStorage
     localStorage.setItem('jobRequests', JSON.stringify(allRequests));
     
-    // Reload the dashboard after deletion
     if (deleteBtn) {
-        deleteBtn.style.display = 'none'; // Hide the button
+        deleteBtn.style.display = 'none'; 
     }
-    // Reload the table using the function exposed globally
     if (typeof window.loadRequests === 'function') {
         window.loadRequests(); 
     }
 }
 
-// ==========================================================
-// ⚙️ MAIN DASHBOARD LOGIC (DOM Content Loaded)
-// ==========================================================
 document.addEventListener('DOMContentLoaded', function() {
     const requestsTableBody = document.getElementById('requestsTableBody');
     const totalRequestsEl = document.querySelector('.t6');
@@ -65,50 +39,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdownBtn = document.getElementById('dropdownBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const dropdownItems = document.querySelectorAll('.dropdown-item');
-    const deleteBtn = document.getElementById('deleteBtn'); // Reference to the delete button
+    const deleteBtn = document.getElementById('deleteBtn');
 
-    // Notification elements
     const notificationBtn = document.getElementById('notificationBtn');
     const notificationCount = document.getElementById('notificationCount');
     const notificationDropdown = document.getElementById('notificationDropdown');
     const notificationList = document.getElementById('notificationList');
 
-    // Setup notification dropdown visibility
     if (notificationDropdown) {
         notificationDropdown.classList.add('notification-dropdown-hidden'); // Start hidden
     }
 
-    // Global variables for dashboard state
     let filteredRequests = [];
     let currentStatusFilter = 'all'; 
 
-    // Detect dashboard type based on the title (for sequential notifications and role-specific statistics)
     const dashboardType = document.querySelector('.t3').textContent.toLowerCase();
 
-    // Define sequential statuses for notifications (workflow guidance)
     let relevantStatusesForNotifications = [];
     if (dashboardType.includes('maintenance')) {
-        relevantStatusesForNotifications = ['pending']; // Notify only for new work
+        relevantStatusesForNotifications = ['pending']; 
     } else if (dashboardType.includes('custodian')) {
-        relevantStatusesForNotifications = ['maintenance completed']; // Notify for Maintenance's completions
+        relevantStatusesForNotifications = ['maintenance completed']; 
     } else if (dashboardType.includes('purchasing')) {
-        relevantStatusesForNotifications = ['custodian completed']; // Notify for Custodian's completions
+        relevantStatusesForNotifications = ['custodian completed']; 
     } else {
-        relevantStatusesForNotifications = ['pending']; // Fallback notifications
+        relevantStatusesForNotifications = ['pending']; 
     }
 
-    // --- Data Management Functions ---
-
-    /**
-     * Updates the visibleInDashboards array for each request based on its status.
-     * - All requests start visible in 'maintenance'.
-     * - When status becomes 'maintenance completed', add 'custodian'.
-     * - When status becomes 'custodian completed', add 'purchasing'.
-     */
     function updateVisibleDashboards(requests) {
         requests.forEach(request => {
             if (!request.visibleInDashboards) {
-                request.visibleInDashboards = ['maintenance']; // Default for new requests
+                request.visibleInDashboards = ['maintenance']; 
             }
             const status = (request.status || '').toLowerCase();
             if (status === 'maintenance completed' && !request.visibleInDashboards.includes('custodian')) {
@@ -120,12 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /**
-     * Filters requests to only show those visible in the current dashboard.
-     * - Maintenance: Show requests visible in 'maintenance'.
-     * - Custodian: Show requests visible in 'custodian'.
-     * - Purchasing: Show requests visible in 'purchasing'.
-     */
     function filterRequestsByDashboard(allRequests, dashboardType) {
         const lowerType = dashboardType.toLowerCase();
         let targetDashboard = 'maintenance';
@@ -137,31 +92,20 @@ document.addEventListener('DOMContentLoaded', function() {
         return allRequests.filter(r => r.visibleInDashboards && r.visibleInDashboards.includes(targetDashboard));
     }
 
-    /**
-     * Apply filters based on search term and status.
-     * Searches across RQT ID, Title, Requester, and Status.
-     * Table shows requests visible in the dashboard (filtered by workflow visibility).
-     * Status filtering is optional via dropdown.
-     */
     function applyFilters(searchTerm = '', statusFilter = currentStatusFilter) {
         
-        // Normalize search term for easier comparison
         const term = searchTerm.toLowerCase().trim();
         
-        // Start with requests visible in the dashboard
         let baseRequests = filterRequestsByDashboard(allRequests, dashboardType);
         
         filteredRequests = baseRequests.filter(request => {
             
-            // CORRECTED SEARCH LOGIC: Check all visible table fields
             const matchesSearch = !term || 
-                (request.rqtId && request.rqtId.toLowerCase().includes(term)) ||          // RQT ID
-                (request.title && request.title.toLowerCase().includes(term)) ||         // Title
-                (request.requestedBy && request.requestedBy.toLowerCase().includes(term)) || // Requester
-                (request.status && request.status.toLowerCase().includes(term));           // Status
+                (request.rqtId && request.rqtId.toLowerCase().includes(term)) ||        
+                (request.title && request.title.toLowerCase().includes(term)) ||        
+                (request.requestedBy && request.requestedBy.toLowerCase().includes(term)) || 
+                (request.status && request.status.toLowerCase().includes(term));         
             
-            
-            // Status filtering logic (optional, via dropdown)
             const normalizedRequestStatus = (request.status || '').toLowerCase().replace(/\s+/g, '-');
             const normalizedFilter = statusFilter.toLowerCase().replace(/\s+/g, '-');
             const matchesStatus = normalizedFilter === 'all' || normalizedRequestStatus === normalizedFilter;
@@ -169,17 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return matchesSearch && matchesStatus;
         });
 
-        // Sort filtered requests by date (newest first) for better UX
         filteredRequests.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
-    /**
-     * Public function to load, process, filter, and render requests.
-     */
     window.loadRequests = function() {
         allRequests = JSON.parse(localStorage.getItem('jobRequests')) || [];
         
-        // --- START: Inject Sample Data if localStorage is empty for testing ---
         if (allRequests.length === 0) {
             const sampleData = [
                 { rqtId: 'RQT1765000190438', title: 'Dehumidifier Repair', status: 'Pending', date: '12/6/2025, 1:49:50 PM', requestedBy: 'John Doe', description: 'for equipment maintenance', details: 'View Details', activityLog: [], visibleInDashboards: ['maintenance'] },
@@ -189,9 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             allRequests = sampleData;
             localStorage.setItem('jobRequests', JSON.stringify(allRequests)); 
         }
-        // --- END: Inject Sample Data ---
 
-        // Update each request's status based on the latest activityLog entry
         allRequests.forEach(request => {
             if (request.activityLog && request.activityLog.length > 0) {
                 const sortedLog = request.activityLog.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -201,10 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Update visibility based on current status
         updateVisibleDashboards(allRequests);
 
-        // Save updated requests back to localStorage
         localStorage.setItem('jobRequests', JSON.stringify(allRequests));
 
         applyFilters(searchInput.value.trim(), currentStatusFilter); 
@@ -214,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateNotifications(); 
     }
 
-    // Render table, including the checkbox column
     function renderTable() {
         requestsTableBody.innerHTML = '';
         filteredRequests.forEach(request => {
@@ -231,23 +165,19 @@ document.addEventListener('DOMContentLoaded', function() {
             requestsTableBody.appendChild(row);
         });
 
-        // Hide delete button on table re-render until something is selected
         if (deleteBtn) {
              deleteBtn.style.display = 'none';
         }
     }
 
-    // Update total count (for all requests)
     function updateTotal() {
-        totalRequestsEl.textContent = `${allRequests.length} total requests`; // Use allRequests for full count
+        totalRequestsEl.textContent = `${allRequests.length} total requests`;
     }
 
-    // Update statistics cards (role-specific for "Pending" and "Completed", based on all requests)
     function updateStatistics() {
-        const total = allRequests.length; // Count all requests
+        const total = allRequests.length; 
         const inProgress = allRequests.filter(r => (r.status || '').toLowerCase().replace(/\s+/g, '-') === 'in-progress').length;
         
-        // Role-specific "Pending" count (includes next-step statuses)
         let pending = 0;
         if (dashboardType.includes('custodian')) {
             pending = allRequests.filter(r => 
@@ -263,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
             pending = allRequests.filter(r => (r.status || '').toLowerCase().replace(/\s+/g, '-') === 'pending').length;
         }
         
-        // Role-specific "Completed" count
         let completed = 0;
         if (dashboardType.includes('maintenance')) {
             completed = allRequests.filter(r => 
@@ -281,15 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
             completed = allRequests.filter(r => (r.status || '').toLowerCase().includes('completed')).length;
         }
 
-        document.querySelectorAll('.c2')[0].textContent = total; // Total Tasks (all)
-        document.querySelectorAll('.c2')[1].textContent = inProgress; // In Progress
-        document.querySelectorAll('.c2')[2].textContent = pending; // Pending (role-specific)
-        document.querySelectorAll('.c2')[3].textContent = completed; // Completed (role-specific)
+        document.querySelectorAll('.c2')[0].textContent = total; 
+        document.querySelectorAll('.c2')[1].textContent = inProgress; 
+        document.querySelectorAll('.c2')[2].textContent = pending; 
+        document.querySelectorAll('.c2')[3].textContent = completed; 
     }
 
-    // Update notifications: Sequential (only for next actionable step)
     function updateNotifications() {
-        // Filter notifications by sequential statuses
         const newRequests = allRequests.filter(request => {
             const normalizedStatus = (request.status || '').toLowerCase().replace(/\s+/g, ' ');
             return relevantStatusesForNotifications.includes(normalizedStatus);
@@ -319,14 +246,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // View Details Function (Redirect to details page with dashboard context)
     function viewDetails(rqtId) {
         window.location.href = `DetailsAndUpdates.html?rqtId=${rqtId}&dashboard=${encodeURIComponent(dashboardType)}`;
     }
 
-    // --- Interaction Handlers ---
-
-    // Notification button: Toggle dropdown (notifications cleared per dashboard)
     if (notificationBtn) {
         notificationBtn.addEventListener('click', function(e) {
             e.preventDefault(); 
@@ -338,28 +261,23 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 notificationDropdown.classList.add('notification-dropdown-visible');
                 notificationDropdown.classList.remove('notification-dropdown-hidden');
-                // Reset count to 0 when opening (clears for this dashboard only)
                 notificationCount.textContent = '0';
             }
         });
     }
 
-    // Close dropdowns when clicking outside
     window.addEventListener('click', function(e) {
-        // Notification dropdown
         if (notificationBtn && notificationDropdown && !notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
             notificationDropdown.classList.remove('notification-dropdown-visible');
             notificationDropdown.classList.add('notification-dropdown-hidden');
         }
         
-        // Status dropdown
         const container = document.querySelector('.dropdown-container');
         if (container && dropdownMenu && !container.contains(e.target)) {
             dropdownMenu.classList.remove('show');
         }
     });
 
-    // Search functionality 
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.trim();
         applyFilters(searchTerm, currentStatusFilter);
@@ -367,12 +285,10 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTotal();
     });
 
-    // Dropdown Toggle
     dropdownBtn.addEventListener('click', function() {
         dropdownMenu.classList.toggle('show');
     });
 
-    // Filter by status (optional, for user control)
     dropdownItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
@@ -384,15 +300,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event delegation for "View Details" buttons
     requestsTableBody.addEventListener('click', function(e) {
         if (e.target.classList.contains('view-details-btn')) {
             const rqtId = e.target.getAttribute('data-rqt-id');
             viewDetails(rqtId);
         }
     });
-    
-    // ✅ Event delegation for checkbox changes to toggle the Delete button
+
     requestsTableBody.addEventListener('change', function(e) {
         if (e.target.classList.contains('select-checkbox')) {
             const anyChecked = document.querySelectorAll('.select-checkbox:checked').length > 0;
@@ -402,11 +316,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // ✅ Listener for Delete button click
     if (deleteBtn) {
         deleteBtn.addEventListener('click', deleteSelectedRequests);
     }
 
-    // Initial load of data when the dashboard loads
     window.loadRequests();
 });
