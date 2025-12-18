@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to auto-fill the requester name and department from the logged-in user
     function autoFillRequesterName() {
         const currentUserEmail = sessionStorage.getItem('currentUserEmail');
         
@@ -8,34 +7,29 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Load users from localStorage
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const currentUser = users.find(u => u.email === currentUserEmail);
         
         if (currentUser) {
-            // Auto-fill the "Requested By" field
             const requestedByField = document.getElementById('requestedBy');
             if (requestedByField) {
                 requestedByField.value = currentUser.name;
-                requestedByField.readOnly = true; // Make it read-only to prevent changes
+                requestedByField.readOnly = true; 
             }
             
-            // Auto-fill the "Department/Unit" in the banner
             const reqDeptElement = document.getElementById('reqDept');
             if (reqDeptElement && currentUser.department) {
                 reqDeptElement.textContent = `Department/Unit: ${currentUser.department}`;
             } else if (reqDeptElement) {
-                reqDeptElement.textContent = 'Department/Unit: Unknown'; // Fallback if department is not set
+                reqDeptElement.textContent = 'Department/Unit: Unknown'; 
             }
         } else {
             console.error('Logged-in user not found in localStorage.');
         }
     }
     
-    // Call the auto-fill function on page load
     autoFillRequesterName();
 
-    // Generate unique request code
     const generateRequestCode = () => {
         const now = new Date();
         const year = now.getFullYear();
@@ -45,20 +39,17 @@ document.addEventListener('DOMContentLoaded', function() {
         return `JR-${year}${month}${day}-${randomNum}`;
     };
 
-    // Set request code and current date (note: HTML has 'rqtId' not 'rqtCode', and no 'currentDate' element, so adjust if needed)
     const rqtIdElement = document.getElementById('rqtId');
     if (rqtIdElement) {
         const code = generateRequestCode();
         rqtIdElement.textContent = `Job Requests - ${code}`;
     }
 
-    // Add Item functionality (updated for div-based grid with proper numbering)
     const addItemBtn = document.querySelector('.btn-add');
     const itemsTableContainer = document.querySelector('.items-table-container');
 
     if (addItemBtn && itemsTableContainer) {
         addItemBtn.addEventListener('click', function() {
-            // Calculate the next item number based on current rows
             const existingRows = itemsTableContainer.querySelectorAll('.items-grid1').length;
             const nextNumber = existingRows + 1;
 
@@ -74,15 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             itemsTableContainer.appendChild(newRow);
 
-            // Add delete functionality to the new button
             newRow.querySelector('.delete-btn').addEventListener('click', function() {
                 newRow.remove();
-                updateItemNumbers(); // Renumber after deletion
+                updateItemNumbers(); 
             });
         });
     }
 
-    // Function to update item numbers after deletion
     const updateItemNumbers = () => {
         const rows = itemsTableContainer.querySelectorAll('.items-grid1');
         rows.forEach((row, index) => {
@@ -91,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Account button functionality
     const accountBtn = document.querySelector('.lg1');
     if (accountBtn) {
         accountBtn.addEventListener('click', function() {
@@ -99,32 +87,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Logout functionality (with confirmation)
     document.querySelector('.lg2').addEventListener('click', function() {
         if (confirm('Are you sure you want to log out?')) {
             window.location.href = 'LoginDashboard.html';
         }
     });
 
-    // Remove the old hardcoded line: document.getElementById('requestedBy').value = 'John Doe'; // Replaced with autoFillRequesterName()
-
-    // Cancel button - Navigate back to Requester Dashboard
     const cancelBtn = document.querySelector('.btn-cancel');
     if (cancelBtn) {
         cancelBtn.addEventListener('click', function() {
             if (confirm('Are you sure you want to cancel? All changes will be lost.')) {
-                window.location.href = 'RequesterDashboard.html'; // Navigate back to Requester Dashboard
+                window.location.href = 'RequesterDashboard.html'; 
             }
         });
     }
 
-    // Handle Submit (fixed item collection and validation, now includes department)
     document.getElementById('submitBtn').addEventListener('click', function() {
-        // Collect data
         const items = [];
         const itemRows = itemsTableContainer.querySelectorAll('.items-grid1');
         itemRows.forEach(row => {
-            // Query inputs by position since the first row uses IDs and added rows use placeholders
             const inputs = row.querySelectorAll('input.input-field:not([readonly])');
             if (inputs.length >= 4) {
                 const name = inputs[0].value.trim();
@@ -143,13 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const approvedTitle = document.getElementById('approvedTitle').value.trim();
         const estimatedCost = document.getElementById('estimatedCost').value.trim();
 
-        // Get the requester's department from the logged-in user
         const currentUserEmail = sessionStorage.getItem('currentUserEmail');
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const currentUser = users.find(u => u.email === currentUserEmail);
         const department = currentUser && currentUser.department ? currentUser.department : 'Unknown';
 
-        // Validation (expanded to check more fields)
         if (!purpose) {
             alert('Please fill in the Purpose.');
             return;
@@ -163,38 +142,33 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Generate RQT ID and date (using consistent format)
         const rqtId = 'RQT' + Date.now();
         const submittedDate = new Date().toLocaleString();
 
-        // Create request object (now includes department)
         const request = {
             rqtId,
-            title: purpose, // Use purpose as title
+            title: purpose, 
             status: 'Pending',
             date: submittedDate,
             progress: 'No updates yet',
             details: 'View Details',
             items,
             requestedBy,
-            department,  // Added department
+            department,  
             deptHead,
             noted: { name: notedName, title: notedTitle },
             approved: { name: approvedName, title: approvedTitle },
             estimatedCost
         };
 
-        // Store in localStorage
         const requests = JSON.parse(localStorage.getItem('jobRequests')) || [];
         requests.push(request);
         localStorage.setItem('jobRequests', JSON.stringify(requests));
 
-        // Update display
         if (rqtIdElement) rqtIdElement.textContent = `Job Requests - ${rqtId}`;
         const submittedDateElement = document.getElementById('submittedDate');
         if (submittedDateElement) submittedDateElement.textContent = submittedDate;
 
-        // Show success message and redirect after delay
         const successMessage = document.getElementById('successMessage');
         if (successMessage) {
             successMessage.style.display = 'block';
@@ -204,6 +178,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Handle Cancel (already handled above, but kept for consistency)
-    // Note: The cancelBtn handler is already defined above
 });
